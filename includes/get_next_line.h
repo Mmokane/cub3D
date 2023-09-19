@@ -1,37 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmokane <mmokane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/16 02:34:54 by mmokane           #+#    #+#             */
-/*   Updated: 2023/09/19 01:28:41 by mmokane          ###   ########.fr       */
+/*   Created: 2022/11/16 14:58:58 by mmokane           #+#    #+#             */
+/*   Updated: 2022/11/18 18:49:11 by mmokane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1000
+#  define BUFFER_SIZE 0
 # endif
 
 # include <unistd.h>
-# include <stdio.h>
 # include <stdlib.h>
 # include <fcntl.h>
-# include <string.h>
-# include <sys/types.h>
-# include <sys/stat.h>
-# include <errno.h>
-# include "../libft/libft.h"
-# include "get_next_line.h"
+# include <limits.h>
 
-typedef struct s_game
-{
-	void	*mlx;
-	void	*win;
-}	t_game;
+char	*ft_strjoin(char *s1, char *s2);
+char	*ft_substr(char *s, unsigned int start, size_t len);
+char	*ft_strdup(char *s);
+char	*get_next_line(int fd);
+size_t	ft_strlen(const char *s);
+int		ft_strchr(char *s);
 
 #endif
