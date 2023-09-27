@@ -6,7 +6,7 @@
 /*   By: mmokane <mmokane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 02:34:54 by mmokane           #+#    #+#             */
-/*   Updated: 2023/09/19 01:28:41 by mmokane          ###   ########.fr       */
+/*   Updated: 2023/09/25 01:16:24 by mmokane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,17 @@
 # include <errno.h>
 # include "../libft/libft.h"
 # include "get_next_line.h"
+
+enum e_content
+{
+	T_C,
+	T_F,
+	T_WE,
+	T_SO,
+	T_EA,
+	T_NO,
+	T_Error;
+};
 
 typedef struct s_game
 {

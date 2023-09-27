@@ -6,13 +6,13 @@
 /*   By: mmokane <mmokane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 02:36:24 by mmokane           #+#    #+#             */
-/*   Updated: 2023/09/19 04:26:55 by mmokane          ###   ########.fr       */
+/*   Updated: 2023/09/25 01:20:41 by mmokane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-int	map_check(char *line)//is map
+int	map_check(char *line)//is map//done
 {
 	int	i;
 
@@ -28,7 +28,8 @@ int	map_check(char *line)//is map
 	}
 	return (1);
 }
-void	exten_check(char *str, char *extension)
+
+void	exten_check(char *str, char *extension)//done
 {
 	char *ext;
 
@@ -45,7 +46,7 @@ void	exten_check(char *str, char *extension)
 	}
 }
 
-void	file_reader(t_game *game, int fd)
+void	file_reader(t_game *game, int fd)//not done
 {
 	char	*line;
 
