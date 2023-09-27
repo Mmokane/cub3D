@@ -43,6 +43,14 @@ typedef struct s_game
 {
 	void	*mlx;
 	void	*win;
+	char	*we;
+	char	*no;
+	char	*ea;
+	char	*so;
+	char	*dr;
+	char	**map;
+	int		F;
+	int		C;
 }	t_game;
 
 #endif

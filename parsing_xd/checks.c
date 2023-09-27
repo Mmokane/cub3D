@@ -28,8 +28,12 @@ int	map_check(char *line)//is map//done
 	}
 	return (1);
 }
+<<<<<<< HEAD
+void	exten_check(char *str, char *extension)//extension checker
+=======
 
 void	exten_check(char *str, char *extension)//done
+>>>>>>> 707607f9e005e24c7be449f7e6f8bf919d1893bf
 {
 	char *ext;
 
@@ -46,7 +50,11 @@ void	exten_check(char *str, char *extension)//done
 	}
 }
 
+<<<<<<< HEAD
+void	file_reader(t_game *game, int fd)//not done yet
+=======
 void	file_reader(t_game *game, int fd)//not done
+>>>>>>> 707607f9e005e24c7be449f7e6f8bf919d1893bf
 {
 	char	*line;
 
