@@ -18,3 +18,39 @@ int lines_value(t_game *game)
         }
     return (0);
 }
+
+int color_value(char *line, int *i)
+{
+    int j;
+    int x;//k
+    int color;
+    char *rgb;
+
+    if (line[*i] == ',')
+        (*i)++;
+    while (line[*i] && line[*i] == ' ')
+        (*i)++;
+    if (line[*])
+        j = *i;
+    while (line[*i] && line[*i] != ',' && line[*i] != ' ')
+		(*i)++;
+	rgb = ft_substr(line, j, *i - j);
+    while (rgb[k])
+    {
+        if(!ft_isdigit(rgb[k]))
+        {
+            write(2, "error at color value\n", 21);
+            exit (1);
+        }
+        i++;
+    }
+    //check for rgb 0;
+    color = ft_atoi(rgb);
+    free(rgb);
+    if (color < 0 || color > 255)
+    {
+        write(2, "error at color value\n", 21);
+        exit (1);
+    }
+    return (color);
+}
