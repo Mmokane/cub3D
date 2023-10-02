@@ -6,56 +6,56 @@
 /*   By: mmokane <mmokane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 04:29:36 by mmokane           #+#    #+#             */
-/*   Updated: 2023/09/25 01:20:16 by mmokane          ###   ########.fr       */
+/*   Updated: 2023/10/02 06:05:35 by mmokane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-int	map_tokens(char *name)//check name // done
+int	map_tokens(char *arg)//check name // done
 {
-	if (!ft_strncmp(name, "NO", 3))
+	if (!ft_strncmp(arg, "NO", 3))
 		return (T_NO);
-	else if (!ft_strncmp(name, "SO", 3))
+	else if (!ft_strncmp(arg, "SO", 3))
 		return (T_SO);
-	else if (!ft_strncmp(name, "WE", 3))
+	else if (!ft_strncmp(arg, "WE", 3))
 		return (T_WE);
-	else if (!ft_strncmp(name, "EA", 3))
+	else if (!ft_strncmp(arg, "EA", 3))
 		return (T_EA);
-	else if (!ft_strncmp(name, "F", 2))
+	else if (!ft_strncmp(arg, "F", 2))
 		return (T_F);
-	else if (!ft_strncmp(name, "C", 2))
+	else if (!ft_strncmp(arg, "C", 2))
 		return (T_C);
 	else
 		return (T_Error);
 }
 
-int	line_parsing(t_game *game, char *line)//line_parsing//not yet
+int	lines_pars(t_cub *cub, char *line)
 {
 	int		i;
 	int		j;
 	int		token;
-	char	*name;
+	char	*arg;
 
 	i = 0;
-	if (map_check(line))//is_map
+	if (map_check(line))
 		return (1);
 	space_skipper(line, &i);
 	j = i;
 	while (line[i] && line[i] != ' ' && line[i] != '\t')
 		i++;
-	name = ft_substr(line, j, i - j);
-	token = map_tokens(name);//check_name
+	arg = ft_substr(line, j, i - j);
+	token = map_tokens(arg);//check_arg
 	if (token == T_Error)
 	{
-		write(2, "Invalid token\n", ft_strlen("Invalid token\n"));
+		write(2, "error\n", 7);
 		exit(1);
 	}
 	else if (token == T_F || token == T_C)
-		color_parsing(cub, ft_strtrim(line, "\n"), token, i);//make them
+		color_pars(cub, ft_strtrim(line, "\n"), token, i);
 	else
-		texture_parsing(cub, ft_strtrim(line, "\n"), token, i);//make them
-	free(name);
+		texture_pars(cub, ft_strtrim(line, "\n"), token, i);
+	free(arg);
 	return (0);
 }
 
@@ -85,4 +85,27 @@ void	check_sides(char **map)//map_borders//done
 		}
 		i++;
 	}
+}
+
+void	texture_pars(t_game *game, char *line, int token, int i)//texture_parsing
+{
+	char	*path;
+
+	space_skipper(line, &i);
+	path = ft_strdup(&line[i]);
+	exten_check(path, ".xpm\0");
+	if (token == T_EA && !game->ea)
+		!game->ea = path;
+	else if (token == T_NO && !game->no)
+		!game->no = path;
+	else if (token == T_WE && !game->we)
+		!game->we = path;
+	else if (token == T_SO && !game->so)
+		!game->so = path;
+	else
+	{
+		write(2, "Error: wrong texture\n", 21);
+		exit(1);
+	}
+	free(line);
 }

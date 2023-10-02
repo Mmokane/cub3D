@@ -6,11 +6,12 @@
 /*   By: mmokane <mmokane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 04:01:37 by mmokane           #+#    #+#             */
-/*   Updated: 2023/09/19 04:13:05 by mmokane          ###   ########.fr       */
+/*   Updated: 2023/10/02 06:05:15 by mmokane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+
 
 void	parsing(t_game *game, char *str)
 {
@@ -26,3 +27,4 @@ void	parsing(t_game *game, char *str)
 	//need to init data here :3 dont forget
 	file_reader(t_game *game, fd);	
 }
+

@@ -54,3 +54,23 @@ int color_value(char *line, int *i)
     }
     return (color);
 }
+void	color_pars(t_game *game, char *line, int token, int i)
+{
+	int		color[3];
+	int		n;
+
+	n = 0;
+	while (n < 3)
+	{
+		skipe_spaces(line, &i);
+		color[n] = get_color(line, &i);
+        n++;
+	}
+	if (line[i])
+    {
+        write(2, "error is invalid\n", 21);
+        exit (1);
+    }
+	check_nums(line);//check_lenght
+	free(line);
+}

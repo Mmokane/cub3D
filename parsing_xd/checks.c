@@ -6,7 +6,7 @@
 /*   By: mmokane <mmokane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 02:36:24 by mmokane           #+#    #+#             */
-/*   Updated: 2023/09/25 01:20:41 by mmokane          ###   ########.fr       */
+/*   Updated: 2023/10/02 05:43:11 by mmokane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,9 @@ int	map_check(char *line)//is map//done
 	}
 	return (1);
 }
-<<<<<<< HEAD
-void	exten_check(char *str, char *extension)//extension checker
-=======
+
 
 void	exten_check(char *str, char *extension)//done
->>>>>>> 707607f9e005e24c7be449f7e6f8bf919d1893bf
 {
 	char *ext;
 
@@ -50,11 +47,7 @@ void	exten_check(char *str, char *extension)//done
 	}
 }
 
-<<<<<<< HEAD
-void	file_reader(t_game *game, int fd)//not done yet
-=======
 void	file_reader(t_game *game, int fd)//not done
->>>>>>> 707607f9e005e24c7be449f7e6f8bf919d1893bf
 {
 	char	*line;
 
