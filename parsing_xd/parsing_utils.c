@@ -6,7 +6,7 @@
 /*   By: mmokane <mmokane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 04:27:19 by mmokane           #+#    #+#             */
-/*   Updated: 2023/10/02 05:36:17 by mmokane          ###   ########.fr       */
+/*   Updated: 2023/10/03 03:04:04 by mmokane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,30 @@ void	check_nums(char *line)// check_lenght
 	if (i != 3)
 		exit_error("Invalid color", line);
 	// free_loop(f);
+}
+void	data_init(t_game *game)
+{
+	game->map->we = NULL;
+	game->map->no = NULL;
+	game->map->ea = NULL;
+	game->map->so = NULL;
+	game->map->dr = NULL;
+	game->map->F = 0;
+	game->map->C = 0
+
+void	init(t_game *game)
+{
+	if (!game)
+		{
+			write(2, "Error\n", 6);
+			exit(1);
+		}
+	game->map = (t_map *)malloc(sizeof(t_map));
+	game->map->map = malloc(sizeof(char *));// recheck for leaks "calloc"
+	if (!game->map->map || !game->map)
+	{
+		write(2, "Error\n", 6);
+		exit(1);
+	}
+	data_init(game);
 }

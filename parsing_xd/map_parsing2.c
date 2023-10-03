@@ -11,7 +11,7 @@ int lines_value(t_game *game)
 {
     if (game->we == NULL || game->no == NULL
         || game->ea == NULL || game->so == NULL
-        || game->F = -1 || game->C = -1)
+        || game->F = 0 || game->C = 0)
         {
             write(2, "error at line value\n", 21);
             exit (1);

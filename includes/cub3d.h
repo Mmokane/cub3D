@@ -6,7 +6,7 @@
 /*   By: mmokane <mmokane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 02:34:54 by mmokane           #+#    #+#             */
-/*   Updated: 2023/10/02 05:45:00 by mmokane          ###   ########.fr       */
+/*   Updated: 2023/10/03 02:57:19 by mmokane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,8 @@ enum e_content
 	T_Error;
 };
 
-typedef struct s_game
+typedef struct s_map
 {
-	void	*mlx;
-	void	*win;
 	char	*we;
 	char	*no;
 	char	*ea;
@@ -51,6 +49,14 @@ typedef struct s_game
 	char	**map;
 	int		F;
 	int		C;
+}	t_map;
+
+typedef struct s_game
+{
+	void	*mlx;
+	void	*win;
+	t_map	*map;
+	
 }	t_game;
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: mmokane <mmokane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 04:01:37 by mmokane           #+#    #+#             */
-/*   Updated: 2023/10/02 06:05:15 by mmokane          ###   ########.fr       */
+/*   Updated: 2023/10/03 03:07:35 by mmokane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	parsing(t_game *game, char *str)
 		ft_putstr_fd("Error\nCan't open file\n", 2);
 		exit(1);
 	}
-	//need to init data here :3 dont forget
+	init(t_game *game);//need to init data here :3 dont forget
 	file_reader(t_game *game, fd);	
 }
 

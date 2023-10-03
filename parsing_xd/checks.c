@@ -6,7 +6,7 @@
 /*   By: mmokane <mmokane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 02:36:24 by mmokane           #+#    #+#             */
-/*   Updated: 2023/10/02 05:43:11 by mmokane          ###   ########.fr       */
+/*   Updated: 2023/10/03 03:09:02 by mmokane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	file_reader(t_game *game, int fd)//not done
 	{
 		if (line[0] != '\n')
 		{
-			if (line_parsing(game, line))
+			if (lines_pars(game, line))
 			{
 				map_parsing(game, line, fd);
 				return ;
