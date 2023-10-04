@@ -9,9 +9,9 @@ int player_exist(char c)
 
 int lines_value(t_game *game)
 {
-    if (game->we == NULL || game->no == NULL
-        || game->ea == NULL || game->so == NULL
-        || game->F = 0 || game->C = 0)
+    if (game->map->we == NULL || game->map->no == NULL
+        || game->map->ea == NULL || game->map->so == NULL
+        || game->map->F == 0 || game->map->C == 0)
         {
             write(2, "error at line value\n", 21);
             exit (1);
@@ -30,14 +30,15 @@ int color_value(char *line, int *i)
         (*i)++;
     while (line[*i] && line[*i] == ' ')
         (*i)++;
-    if (line[*])
+    if (line[*i])
         j = *i;
     while (line[*i] && line[*i] != ',' && line[*i] != ' ')
 		(*i)++;
 	rgb = ft_substr(line, j, *i - j);
-    while (rgb[k])
+    x = -1;
+    while (rgb[++x])
     {
-        if(!ft_isdigit(rgb[k]))
+        if(!ft_isdigit(rgb[x]))
         {
             write(2, "error at color value\n", 21);
             exit (1);
@@ -54,7 +55,7 @@ int color_value(char *line, int *i)
     }
     return (color);
 }
-void	color_pars(t_game *game, char *line, int token, int i)
+void	color_pars(char *line, int i)
 {
 	int		color[3];
 	int		n;
@@ -62,13 +63,13 @@ void	color_pars(t_game *game, char *line, int token, int i)
 	n = 0;
 	while (n < 3)
 	{
-		skipe_spaces(line, &i);
-		color[n] = get_color(line, &i);
+		space_skipper(line, &i);
+		color[n] = color_value(line, &i);
         n++;
 	}
 	if (line[i])
     {
-        write(2, "error is invalid\n", 21);
+        write(2, "error is invalid\n", 18);
         exit (1);
     }
 	check_nums(line);//check_lenght

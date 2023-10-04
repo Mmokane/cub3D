@@ -6,7 +6,7 @@
 #    By: mmokane <mmokane@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/16 02:38:17 by mmokane           #+#    #+#              #
-#    Updated: 2023/09/17 02:28:09 by mmokane          ###   ########.fr        #
+#    Updated: 2023/10/04 03:57:49 by mmokane          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,10 @@ CC = cc
 
 CFLAGS = -Wall -Werror -Wextra #-fsanitize=address -g3
 
-SRCS =  gnl/get_next_line_utils.c gnl/get_next_line.c 
+SRCS =  parsing_xd/checks.c parsing_xd/map_parsing.c \
+		parsing_xd/parsing.c parsing_xd/map_parsing2.c \
+		parsing_xd/parsing_utils.c \
+		
 
 OBJS = $(SRCS:.c=.o)
 

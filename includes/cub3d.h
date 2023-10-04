@@ -6,7 +6,7 @@
 /*   By: mmokane <mmokane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 02:34:54 by mmokane           #+#    #+#             */
-/*   Updated: 2023/10/03 02:57:19 by mmokane          ###   ########.fr       */
+/*   Updated: 2023/10/04 04:36:09 by mmokane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ enum e_content
 	T_SO,
 	T_EA,
 	T_NO,
-	T_Error;
+	T_Error,
 };
 
 typedef struct s_map
@@ -49,6 +49,8 @@ typedef struct s_map
 	char	**map;
 	int		F;
 	int		C;
+	int		H;
+	int		W;
 }	t_map;
 
 typedef struct s_game
@@ -58,5 +60,35 @@ typedef struct s_game
 	t_map	*map;
 	
 }	t_game;
+
+//////////////////////checks.c//////////////////////
+int		map_check(char *line);
+void	final_check(t_game *game, char **map);
+void	exten_check(char *str, char *extension);
+void	map_pars(t_game *game, char *line, int fd);
+void	file_reader(t_game *game, int fd);
+
+//////////////////////map_parsing.c//////////////////////
+int		map_tokens(char *arg);
+int		lines_pars(t_game *game, char *line);
+void	check_sides(char **map);
+void	texture_pars(t_game *game, char *line, int token, int i);
+
+//////////////////////map_parsing2.c//////////////////////
+int 	player_exist(char c);
+int 	lines_value(t_game *game);
+int 	color_value(char *line, int *i);
+void	color_pars(char *line, int i);
+
+//////////////////////parsing_utils.c//////////////////////
+void	space_skipper(char *s, int *i);
+void	check_nums(char *line);
+void	data_init(t_game *game);
+void	init(t_game *game);
+
+//////////////////////parsing.c//////////////////////
+char	**map_create(char **str, char *arg);
+void	parsing(t_game *game, char *str);
+
 
 #endif

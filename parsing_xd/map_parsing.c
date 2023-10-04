@@ -6,7 +6,7 @@
 /*   By: mmokane <mmokane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 04:29:36 by mmokane           #+#    #+#             */
-/*   Updated: 2023/10/02 06:05:35 by mmokane          ###   ########.fr       */
+/*   Updated: 2023/10/04 04:19:10 by mmokane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	map_tokens(char *arg)//check name // done
 		return (T_Error);
 }
 
-int	lines_pars(t_cub *cub, char *line)
+int	lines_pars(t_game *game, char *line)
 {
 	int		i;
 	int		j;
@@ -52,9 +52,9 @@ int	lines_pars(t_cub *cub, char *line)
 		exit(1);
 	}
 	else if (token == T_F || token == T_C)
-		color_pars(cub, ft_strtrim(line, "\n"), token, i);
+		color_pars(game, ft_strtrim(line, "\n"), token, i);
 	else
-		texture_pars(cub, ft_strtrim(line, "\n"), token, i);
+		texture_pars(game, ft_strtrim(line, "\n"), token, i);
 	free(arg);
 	return (0);
 }
@@ -94,14 +94,14 @@ void	texture_pars(t_game *game, char *line, int token, int i)//texture_parsing
 	space_skipper(line, &i);
 	path = ft_strdup(&line[i]);
 	exten_check(path, ".xpm\0");
-	if (token == T_EA && !game->ea)
-		!game->ea = path;
-	else if (token == T_NO && !game->no)
-		!game->no = path;
-	else if (token == T_WE && !game->we)
-		!game->we = path;
-	else if (token == T_SO && !game->so)
-		!game->so = path;
+	if (token == T_EA && !game->map->ea)
+		game->map->ea = path;
+	else if (token == T_NO && !game->map->no)
+		game->map->no = path;
+	else if (token == T_WE && !game->map->we)
+		game->map->we = path;
+	else if (token == T_SO && !game->map->so)
+		game->map->so = path;
 	else
 	{
 		write(2, "Error: wrong texture\n", 21);
