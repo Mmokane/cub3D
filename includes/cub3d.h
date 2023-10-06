@@ -6,7 +6,7 @@
 /*   By: mmokane <mmokane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 02:34:54 by mmokane           #+#    #+#             */
-/*   Updated: 2023/10/04 04:36:09 by mmokane          ###   ########.fr       */
+/*   Updated: 2023/10/06 04:24:41 by mmokane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@
 # include <errno.h>
 # include "../libft/libft.h"
 # include "get_next_line.h"
+
+# define TILE_SIZE 32
 
 enum e_content
 {
@@ -53,12 +55,18 @@ typedef struct s_map
 	int		W;
 }	t_map;
 
+typedef struct s_player
+{
+	int		x;
+	int		y;
+	char	dir;
+}	t_player;
 typedef struct s_game
 {
 	void	*mlx;
 	void	*win;
 	t_map	*map;
-	
+	t_player *player;
 }	t_game;
 
 //////////////////////checks.c//////////////////////
@@ -67,6 +75,7 @@ void	final_check(t_game *game, char **map);
 void	exten_check(char *str, char *extension);
 void	map_pars(t_game *game, char *line, int fd);
 void	file_reader(t_game *game, int fd);
+void	player_init(t_game *game, char **map, int y, int x);
 
 //////////////////////map_parsing.c//////////////////////
 int		map_tokens(char *arg);
@@ -78,7 +87,7 @@ void	texture_pars(t_game *game, char *line, int token, int i);
 int 	player_exist(char c);
 int 	lines_value(t_game *game);
 int 	color_value(char *line, int *i);
-void	color_pars(char *line, int i);
+void	color_pars(char *line, int i, int token, t_game *game);
 
 //////////////////////parsing_utils.c//////////////////////
 void	space_skipper(char *s, int *i);

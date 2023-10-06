@@ -6,7 +6,7 @@
 /*   By: mmokane <mmokane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 14:58:58 by mmokane           #+#    #+#             */
-/*   Updated: 2023/10/04 04:07:38 by mmokane          ###   ########.fr       */
+/*   Updated: 2023/10/06 04:42:36 by mmokane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,13 @@
 # include <fcntl.h>
 # include <limits.h>
 
-char	*ft_strjoin(char const *s1, char const *s2);
-char	*ft_substr(char const *s, unsigned int start, size_t len);
-char	*ft_strdup(const char *s);
+
+char	*ft_strjoin2(char *s1, char *s2);
+char	*ft_substr2(char const *s, unsigned int start, size_t len);
+char	*ft_strdup2(const char *s);
 char	*get_next_line(int fd);
-size_t	ft_strlen(const char *s);
-int		ft_strchr(char *s);
+size_t	ft_strlen2(const char *s);
+int		ft_strchr2(char *s);
 
 
 #endif

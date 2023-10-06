@@ -6,7 +6,7 @@
 /*   By: mmokane <mmokane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 02:36:24 by mmokane           #+#    #+#             */
-/*   Updated: 2023/10/04 04:16:08 by mmokane          ###   ########.fr       */
+/*   Updated: 2023/10/06 05:28:06 by mmokane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,12 @@ void	final_check(t_game *game, char **map)
 	int j;
 
 	i = 0;
-	while(map[i] && lines_value(game) == 0)
+	printf("map*-**-\n");
+	printf("%s\n", map[0]);
+	while(map[++i] && lines_value(game) == 0)
 	{
-		j = 0;
-		while(map[i][j])
+		j = -1;
+		while(map[i][++j])
 		{
 			if(map[i][j] == '0' || player_exist(map[i][j]))
 			{
@@ -57,10 +59,11 @@ void	final_check(t_game *game, char **map)
 						exit(1);
 					}
 			}
+			if (map[i][j] == 'S' || map[i][j] == 'N'
+				|| map[i][j] == 'E' || map[i][j] == 'W')
+				player_init(game, map, i, j);
 		}
-		j++;
 	}
-	i++;
 }
 
 void	exten_check(char *str, char *extension)//done
@@ -105,6 +108,7 @@ void	file_reader(t_game *game, int fd)//not done
 	char	*line;
 
 	line = get_next_line(fd);
+	printf("line: %s\n", line);
 	while (line)
 	{
 		if (line[0] != '\n')
@@ -118,4 +122,5 @@ void	file_reader(t_game *game, int fd)//not done
 		free(line);
 		line = get_next_line(fd);
 	}
+	printf("%s\n hhhhhhh", line);
 }

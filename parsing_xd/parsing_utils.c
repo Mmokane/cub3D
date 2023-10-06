@@ -6,7 +6,7 @@
 /*   By: mmokane <mmokane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 04:27:19 by mmokane           #+#    #+#             */
-/*   Updated: 2023/10/03 03:04:04 by mmokane          ###   ########.fr       */
+/*   Updated: 2023/10/06 04:26:47 by mmokane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	check_nums(char *line)// check_lenght
 	while (f[i])
 		i++;
 	if (i != 3)
-		exit_error("Invalid color", line);
+		ft_putstr_fd("Error\n", 2);
 	// free_loop(f);
 }
 void	data_init(t_game *game)
@@ -44,7 +44,8 @@ void	data_init(t_game *game)
 	game->map->so = NULL;
 	game->map->dr = NULL;
 	game->map->F = 0;
-	game->map->C = 0
+	game->map->C = 0;
+}
 
 void	init(t_game *game)
 {

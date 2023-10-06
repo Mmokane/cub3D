@@ -6,12 +6,28 @@
 /*   By: mmokane <mmokane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 04:01:37 by mmokane           #+#    #+#             */
-/*   Updated: 2023/10/04 04:24:38 by mmokane          ###   ########.fr       */
+/*   Updated: 2023/10/06 05:21:38 by mmokane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
+void	player_init(t_game *game, char **map, int y, int x)
+{
+	if (game->player->x != 0 || game->player->y != 0)
+		ft_putstr_fd("Error Multiple players\n", 2);
+	game->player->x = (x * TILE_SIZE) + 16;
+	game->player->y = (y * TILE_SIZE) + 16;
+	if (map[y][x] == 'N')
+		game->player->dir = 'N';
+	else if (map[y][x] == 'S')
+		game->player->dir = 'S';
+	else if (map[y][x] == 'E')
+		game->player->dir = 'E';
+	else if (map[y][x] == 'W')
+		game->player->dir = 'W';
+	game->map->map[y][x] = '0';
+}
 char	**map_create(char **str, char *arg)
 {
 	int i;

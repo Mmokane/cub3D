@@ -9,12 +9,12 @@ int player_exist(char c)
 
 int lines_value(t_game *game)
 {
+    // printf("%s", game->map->we);
     if (game->map->we == NULL || game->map->no == NULL
         || game->map->ea == NULL || game->map->so == NULL
         || game->map->F == 0 || game->map->C == 0)
         {
             write(2, "error at line value\n", 21);
-            exit (1);
         }
     return (0);
 }
@@ -55,7 +55,7 @@ int color_value(char *line, int *i)
     }
     return (color);
 }
-void	color_pars(char *line, int i)
+void	color_pars(char *line, int i, int token, t_game *game)
 {
 	int		color[3];
 	int		n;
@@ -73,5 +73,10 @@ void	color_pars(char *line, int i)
         exit (1);
     }
 	check_nums(line);//check_lenght
+    if (token == T_F && game->map->F == 0)
+		game->map->F = (color[0] << 16) + (color[1] << 8) + color[2];
+	else if (token == T_C && game->map->C == 0)
+		game->map->C = (color[0] << 16) + (color[1] << 8) + color[2];
+	else
 	free(line);
 }

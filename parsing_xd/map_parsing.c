@@ -6,7 +6,7 @@
 /*   By: mmokane <mmokane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 04:29:36 by mmokane           #+#    #+#             */
-/*   Updated: 2023/10/04 04:19:10 by mmokane          ###   ########.fr       */
+/*   Updated: 2023/10/06 05:18:17 by mmokane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	lines_pars(t_game *game, char *line)
 		exit(1);
 	}
 	else if (token == T_F || token == T_C)
-		color_pars(game, ft_strtrim(line, "\n"), token, i);
+		color_pars(ft_strtrim(line, "\n"), token, i, game);
 	else
 		texture_pars(game, ft_strtrim(line, "\n"), token, i);
 	free(arg);
@@ -66,6 +66,8 @@ void	check_sides(char **map)//map_borders//done
 
 	j = 0;
 	i = 0;
+	printf("heyyyyyyyyyyyyyyyyy\n");
+	printf("%s\n", map[0]);
 	while (map[0][j] == ' ')
 		j++;
 	while (map[0][j] == '1')
@@ -91,6 +93,7 @@ void	texture_pars(t_game *game, char *line, int token, int i)//texture_parsing
 {
 	char	*path;
 
+	printf("ssssssssssssssssssss\n");
 	space_skipper(line, &i);
 	path = ft_strdup(&line[i]);
 	exten_check(path, ".xpm\0");
