@@ -6,7 +6,7 @@
 /*   By: mmokane <mmokane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 04:01:37 by mmokane           #+#    #+#             */
-/*   Updated: 2023/10/07 09:46:05 by mmokane          ###   ########.fr       */
+/*   Updated: 2023/10/07 11:48:21 by mmokane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	argslen(char **args)
 void	player_init(t_game *game, char **map, int y, int x)
 {
 	if (game->player->x != 0 || game->player->y != 0)
-		ft_putstr_fd("Error Multiple players\n", 2);
+		ft_putstr_fd2("Error Multiple players\n", 2);
 	game->player->x = (x * TILE_SIZE) + 16;
 	game->player->y = (y * TILE_SIZE) + 16;
 	if (map[y][x] == 'N')
@@ -38,6 +38,18 @@ void	player_init(t_game *game, char **map, int y, int x)
 	else if (map[y][x] == 'W')
 		game->player->dir = 'W';
 	game->map->map[y][x] = '0';
+}
+
+void	checker(t_game *game)
+{
+	if (!game->map->no || !game->map->so || !game->map->we || !game->map->ea)
+		ft_putstr_fd2("Missing texture\n", 2);
+	else if (game->map->F == -1 || game->map->C == -1)
+		ft_putstr_fd2("Missing color\n", 2);
+	else if (!game->map->map[0])
+		ft_putstr_fd2("Missing map\n", 2);
+	else if (game->player->x == 0 || game->player->y == 0)
+		ft_putstr_fd2("Missing player\n", 2);
 }
 char	**map_create(char **str, char *arg)
 {
@@ -73,14 +85,12 @@ void	parsing(t_game *game, char *str)
 	exten_check(str, ".cub");
 	fd = open(str, O_RDONLY);
 	if (fd < 0)
-	{
-		ft_putstr_fd("Error\nCan't open file\n", 2);
-		exit(1);
-	}
+		ft_putstr_fd2("Error, cant open file\n", 2);
 	init(game);//need to init data here :3 dont forget
 	file_reader(game, fd);
 	close(fd);
 	final_check(game, game->map->map);
+	checker(game);
 	check_sides(game->map->map);
 }
 

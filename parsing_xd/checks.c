@@ -6,7 +6,7 @@
 /*   By: mmokane <mmokane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 02:36:24 by mmokane           #+#    #+#             */
-/*   Updated: 2023/10/07 09:58:56 by mmokane          ###   ########.fr       */
+/*   Updated: 2023/10/07 11:50:54 by mmokane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void	final_check(t_game *game, char **map)
 	i = -1;
 	while (map[++i] && lines_value(game) == 0)
 	{
-		printf("map = %s\n", map[i]);
 		j = -1;
 		while (map[i][++j])
 		{
@@ -45,18 +44,12 @@ void	final_check(t_game *game, char **map)
 			{
 				if (j > (int)ft_strlen(map[i + 1]) 
 					|| j > (int)ft_strlen(map[i - 1]) || j == 0)
-					{
-						write(2, "Error Invalid map\n", 18);
-						exit(1);
-					}
+					ft_putstr_fd2("Error: Invalid map\n", 2);
 				if (map[i][j - 1] == ' ' || map[i][j - 1] == '\0'
 					|| map[i][j + 1] == ' ' || map[i][j + 1] == '\0'
 					|| map[i - 1][j] == ' ' || map[i - 1][j] == '\0'
 					|| map[i + 1][j] == ' ' || map[i + 1][j] == '\0')
-					{
-						write(2, "Error Invalid map\n", 18);
-						exit(1);
-					}
+					ft_putstr_fd2("Error: Invalid map\n", 2);
 			}
 			if (map[i][j] == 'S' || map[i][j] == 'N'
 				|| map[i][j] == 'E' || map[i][j] == 'W')
@@ -71,15 +64,9 @@ void	exten_check(char *str, char *extension)//done
 
 	ext = ft_strrchr(str, '.');
 	if (!ext)
-	{
-		ft_putstr_fd("Error No extension\n", 2);
-		exit(1);
-	}
+		ft_putstr_fd2("Error Wrong extension\n", 2);
 	else if (ft_strncmp(ext, extension, 5))
-	{
-		ft_putstr_fd("Error Wrong extension\n", 2);
-		exit(1);
-	}
+		ft_putstr_fd2("Error Wrong extension\n", 2);
 }
 
 void	map_pars(t_game *game, char *line, int fd)
@@ -89,10 +76,7 @@ void	map_pars(t_game *game, char *line, int fd)
 	while (line)
 	{
 		if (!map_check(line))
-		{
-			write(2, "Error Invalid map\n", 19);
-			exit(1);
-		}
+			ft_putstr_fd2("Error Invalid map\n", 2);
 		game->map->H++;
 		tmp = ft_strtrim(line, "\n");
 		if (game->map->W < ((int)ft_strlen(tmp)))
@@ -109,7 +93,6 @@ void	file_reader(t_game *game, int fd)//not done
 	line = get_next_line(fd);
 	while (line)
 	{
-		printf("line = %s\n", line);
 		if (line[0] != '\n')
 		{
 			if (lines_pars(game, line))
@@ -121,5 +104,4 @@ void	file_reader(t_game *game, int fd)//not done
 		free(line);
 		line = get_next_line(fd);
 	}
-	printf("line 2 = %s\n", line);
 }

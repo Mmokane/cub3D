@@ -6,7 +6,7 @@
 #    By: mmokane <mmokane@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/16 02:38:17 by mmokane           #+#    #+#              #
-#    Updated: 2023/10/06 20:55:56 by mmokane          ###   ########.fr        #
+#    Updated: 2023/10/07 11:55:23 by mmokane          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = cub3d
 
 CC = cc 
 
-CFLAGS = -Wall -Werror -Wextra -g3 -fsanitize=address 
+CFLAGS = -Wall -Werror -Wextra #-g3 -fsanitize=address 
 
 SRCS =  parsing_xd/checks.c parsing_xd/map_parsing.c \
 		parsing_xd/parsing.c parsing_xd/map_parsing2.c \

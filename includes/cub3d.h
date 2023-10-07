@@ -6,7 +6,7 @@
 /*   By: mmokane <mmokane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 02:34:54 by mmokane           #+#    #+#             */
-/*   Updated: 2023/10/07 09:34:33 by mmokane          ###   ########.fr       */
+/*   Updated: 2023/10/07 11:44:54 by mmokane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ int		map_tokens(char *arg);
 int		lines_pars(t_game *game, char *line);
 void	check_sides(char **map);
 void	texture_pars(t_game *game, char *line, int token, int i);
+void	ft_putstr_fd2(char *s, int fd);
 
 //////////////////////map_parsing2.c//////////////////////
 int 	player_exist(char c);

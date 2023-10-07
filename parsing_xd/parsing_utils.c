@@ -6,7 +6,7 @@
 /*   By: mmokane <mmokane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 04:27:19 by mmokane           #+#    #+#             */
-/*   Updated: 2023/10/07 09:46:43 by mmokane          ###   ########.fr       */
+/*   Updated: 2023/10/07 11:47:40 by mmokane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	check_nums(char *line)// check_lenght
 	while (f[i])
 		i++;
 	if (i != 3)
-		ft_putstr_fd("Error\n", 2);
+		ft_putstr_fd2("Error\n", 2);
 	// free_loop(f);
 }
 void	data_init(t_game *game)
@@ -45,6 +45,8 @@ void	data_init(t_game *game)
 	game->map->dr = NULL;
 	game->map->F = 0;
 	game->map->C = 0;
+	game->player->x = 0;
+	game->player->y = 0;
 }
 
 void	init(t_game *game)
@@ -53,7 +55,8 @@ void	init(t_game *game)
 	{
 		write(2, "Error\n", 6);
 		exit(1);
-	}	
+	}
+	game->player = (t_player *)malloc(sizeof(t_player));
 	game->map = (t_map *)malloc(sizeof(t_map));
 	game->map->map = ft_calloc(1, sizeof(char *));// recheck for leaks "calloc"
 	if (!game->map->map || !game->map)

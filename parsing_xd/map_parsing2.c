@@ -12,10 +12,7 @@ int lines_value(t_game *game)
     if (game->map->we == NULL || game->map->no == NULL
         || game->map->ea == NULL || game->map->so == NULL
         || game->map->F == -1 || game->map->C == -1)
-        {
-            write(2, "error at line value\n", 21);
-            exit (1);
-        }
+            ft_putstr_fd2("Error at line value\n", 2);
     return (0);
 }
 
@@ -36,22 +33,14 @@ int color_value(char *line, int *i)
 	rgb = ft_substr(line, j, *i - j);
     x = -1;
     while (rgb[++x])
-    {
         if(!ft_isdigit(rgb[x]))
-        {
-            write(2, "error at color values\n", 21);
-            exit (1);
-        }
-    }
+            ft_putstr_fd2("Error at color value 'digit'\n", 2);
     color = ft_atoi(rgb);
     if (!rgb[0])
-		ft_putstr_fd("Error f rgb hhhh \n", 2);
+		ft_putstr_fd2("Error f rgb hhhh \n", 2);
     free(rgb);
     if (color < 0 || color > 255)
-    {
-        write(2, "error at color valueeee\n", 21);
-        exit (1);
-    }
+        ft_putstr_fd2("Error at color value 'range'\n", 2);
     return (color);
 }
 void	color_pars(t_game *game, char *line, int token, int i)
@@ -77,6 +66,6 @@ void	color_pars(t_game *game, char *line, int token, int i)
 	else if (token == T_C && game->map->C == 0)
 		game->map->C = (color[0] << 16) + (color[1] << 8) + color[2];   
     else
-        ft_putstr_fd("Error duplicate rgb hhhh \n", 2);
+        ft_putstr_fd2("Error duplicate rgb hhhh \n", 2);
 	free(line);
 }

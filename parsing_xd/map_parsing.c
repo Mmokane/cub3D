@@ -6,12 +6,19 @@
 /*   By: mmokane <mmokane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 04:29:36 by mmokane           #+#    #+#             */
-/*   Updated: 2023/10/07 09:45:10 by mmokane          ###   ########.fr       */
+/*   Updated: 2023/10/07 11:49:40 by mmokane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
+void	ft_putstr_fd2(char *s, int fd)
+{
+	if (s == 0)
+		return ;
+	write(fd, s, ft_strlen(s));
+	exit (1);
+}
 int	map_tokens(char *arg)//check name // done
 {
 	if (!ft_strncmp(arg, "NO", 3))
@@ -47,10 +54,7 @@ int	lines_pars(t_game *game, char *line)
 	arg = ft_substr(line, j, i - j);
 	token = map_tokens(arg);//check_arg
 	if (token == T_Error)
-	{
-		write(2, "error\n", 7);
-		exit(1);
-	}
+		ft_putstr_fd2("Error: Invalid token\n", 2);
 	else if (token == T_F || token == T_C)
 		color_pars(game, ft_strtrim(line, "\n"), token, i);
 	else
@@ -79,10 +83,7 @@ void	check_sides(char **map)//map_borders//done
 	{
 		if (map[i][0] == '\0' || map[i][0] == '\t'
 			|| map[i][0] == '\n')
-		{
-			write(2, "Error: Invalid map\n", 19);
-			exit(1);
-		}
+			ft_putstr_fd2("Error: Invalid map\n", 2);
 		i++;
 	}
 }
