@@ -9,13 +9,6 @@ int player_exist(char c)
 
 int lines_value(t_game *game)
 {
-    printf("YETETES\n");
-    printf("game->map->we = %s\n", game->map->we);
-    printf("game->map->no = %s\n", game->map->no);
-    printf("game->map->ea = %s\n", game->map->ea);
-    printf("game->map->so = %s\n", game->map->so);
-    printf("game->map->F = %d\n", game->map->F);
-    printf("game->map->C = %d\n", game->map->C);
     if (game->map->we == NULL || game->map->no == NULL
         || game->map->ea == NULL || game->map->so == NULL
         || game->map->F == -1 || game->map->C == -1)
@@ -33,8 +26,6 @@ int color_value(char *line, int *i)
     int color;
     char *rgb;
 
-    while (!ft_isdigit(line[*i]))
-        (*i)++;
     if (line[*i] == ',')
 		(*i)++;
 	while (line[*i] && line[*i] == ' ')
@@ -53,9 +44,8 @@ int color_value(char *line, int *i)
         }
     }
     color = ft_atoi(rgb);
-    printf("color = %d\n", color);
     if (!rgb[0])
-		ft_putstr_fd("Error hhhh \n", 2);
+		ft_putstr_fd("Error f rgb hhhh \n", 2);
     free(rgb);
     if (color < 0 || color > 255)
     {
@@ -64,17 +54,17 @@ int color_value(char *line, int *i)
     }
     return (color);
 }
-void	color_pars(char *line, int i, int token, t_game *game)
+void	color_pars(t_game *game, char *line, int token, int i)
 {
 	int		color[3];
 	int		n;
 
-	n = 0;
-	while (n < 3)
+	n = -1;
+	while (++n < 3)
 	{
 		space_skipper(line, &i);
 		color[n] = color_value(line, &i);
-        n++;
+        // n++;
 	}
 	if (line[i])
     {
@@ -82,15 +72,11 @@ void	color_pars(char *line, int i, int token, t_game *game)
         exit (1);
     }
 	check_nums(line);//check_lenght
-    printf("T_F = %d\n", T_F);
-    printf("T_C = %d\n", T_C);
-    printf("F hhh = %d\n", game->map->F);
-    printf("C hhh = %d\n", game->map->C);
-    if (token == T_F && game->map->F == -1)
+    if (token == T_F && game->map->F == 0)
 		game->map->F = (color[0] << 16) + (color[1] << 8) + color[2];
-	else if(token == T_C && game->map->C == -1)
+	else if (token == T_C && game->map->C == 0)
 		game->map->C = (color[0] << 16) + (color[1] << 8) + color[2];   
+    else
+        ft_putstr_fd("Error duplicate rgb hhhh \n", 2);
 	free(line);
-    printf("F zp= %d\n", game->map->F);
-    printf("C zp= %d\n", game->map->C);
 }

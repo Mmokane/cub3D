@@ -6,7 +6,7 @@
 /*   By: mmokane <mmokane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 02:34:54 by mmokane           #+#    #+#             */
-/*   Updated: 2023/10/06 04:24:41 by mmokane          ###   ########.fr       */
+/*   Updated: 2023/10/07 09:34:33 by mmokane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,13 @@
 
 enum e_content
 {
-	T_C,
-	T_F,
 	T_WE,
 	T_SO,
 	T_EA,
 	T_NO,
 	T_Error,
+	T_F,
+	T_C,
 };
 
 typedef struct s_map
@@ -87,7 +87,7 @@ void	texture_pars(t_game *game, char *line, int token, int i);
 int 	player_exist(char c);
 int 	lines_value(t_game *game);
 int 	color_value(char *line, int *i);
-void	color_pars(char *line, int i, int token, t_game *game);
+void	color_pars(t_game *game, char *line, int token, int i);
 
 //////////////////////parsing_utils.c//////////////////////
 void	space_skipper(char *s, int *i);
@@ -101,3 +101,59 @@ void	parsing(t_game *game, char *str);
 
 
 #endif
+
+
+
+// void	checker(t_cub *cub, char **map)
+// {
+// 	int		i;
+// 	int		j;
+
+// 	i = 0;
+// 	while (map[++i] && set_lines(cub) == 0)
+// 	{
+// 		j = -1;
+// 		while (map[i][++j])
+// 		{
+// 			if (map[i][j] == '0' || is_player(map[i][j]))
+// 			{
+// 				if (j > (int)ft_strlen(map[i + 1])
+// 					|| j > (int)ft_strlen(map[i - 1]) || j == 0)
+// 					exit_str("Error: Invalid map");
+// 				if (map[i][j - 1] == ' ' || map[i][j - 1] == '\0'
+// 					|| map[i][j + 1] == ' ' || map[i][j + 1] == '\0'
+// 					|| map[i - 1][j] == ' ' || map[i - 1][j] == '\0'
+// 					|| map[i + 1][j] == ' ' || map[i + 1][j] == '\0')
+// 					exit_error("Invalid map", map[i]);
+// 			}
+// 			if (map[i][j] == 'N' || map[i][j] == 'S'
+// 				|| map[i][j] == 'W' || map[i][j] == 'E')
+// 				add_player(cub, map, i, j);
+// 		}
+// 	}
+// }
+
+// char	**advanced_add(char **strs, char *arg)
+// {
+// 	char	**args;
+// 	int		wlen;
+// 	int		i;
+
+// 	if (!strs[0] || !strs)
+// 	{
+// 		args = (char **)malloc(sizeof(char *) * 2);
+// 		args[0] = ft_strdup(arg);
+// 		args[1] = NULL;
+// 		free_loop(strs);
+// 		return (args);
+// 	}
+// 	wlen = argslen(strs);
+// 	args = (char **)malloc(sizeof(char *) * (wlen + 1));
+// 	i = -1;
+// 	while (strs[++i])
+// 		args[i] = ft_strdup(strs[i]);
+// 	args[i] = ft_strdup(arg);
+// 	args[i + 1] = NULL;
+// 	free_loop(strs);
+// 	return (args);
+// }

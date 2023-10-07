@@ -6,7 +6,7 @@
 /*   By: mmokane <mmokane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 04:27:19 by mmokane           #+#    #+#             */
-/*   Updated: 2023/10/06 21:17:37 by mmokane          ###   ########.fr       */
+/*   Updated: 2023/10/07 09:46:43 by mmokane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,12 @@ void	data_init(t_game *game)
 void	init(t_game *game)
 {
 	if (!game)
-		{
-			write(2, "Error\n", 6);
-			exit(1);
-		}
+	{
+		write(2, "Error\n", 6);
+		exit(1);
+	}	
 	game->map = (t_map *)malloc(sizeof(t_map));
-	game->map->map = malloc(sizeof(char *));// recheck for leaks "calloc"
+	game->map->map = ft_calloc(1, sizeof(char *));// recheck for leaks "calloc"
 	if (!game->map->map || !game->map)
 	{
 		write(2, "Error\n", 6);

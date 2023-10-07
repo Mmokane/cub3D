@@ -6,7 +6,7 @@
 /*   By: mmokane <mmokane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 13:50:16 by oubelhaj          #+#    #+#             */
-/*   Updated: 2023/10/06 17:15:52 by mmokane          ###   ########.fr       */
+/*   Updated: 2023/10/07 09:43:15 by mmokane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,12 @@
 # include <unistd.h>
 # include <string.h>
 
-char	*fill_buff(int fd);
+size_t	ft_strlen2(const char *s);
+size_t	ft_strlcpy2(char *dst, const char *src, size_t dstsize);
+char	*ft_strchr2(const char *s, int c);
+char	*ft_strjoin2(char const *s1, char const *s2);
+char	*get_line(char *s);
+char	*get_remine(char *s);
 char	*get_next_line(int fd);
-size_t	ft_strlen2(const char *str);
-char	*ft_strchr2(char *buff, char c);
-char	*ft_strjoin2(char *s1, char const *s2);
-char	*ft_substr2(char const *s, unsigned int start, size_t len);
 
 #endif

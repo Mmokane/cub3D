@@ -6,7 +6,7 @@
 /*   By: mmokane <mmokane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 02:36:24 by mmokane           #+#    #+#             */
-/*   Updated: 2023/10/06 21:30:45 by mmokane          ###   ########.fr       */
+/*   Updated: 2023/10/07 09:58:56 by mmokane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,21 +31,20 @@ int	map_check(char *line)//is map//done
 
 void	final_check(t_game *game, char **map)
 {
-	int i;
-	int j;
+	int		i;
+	int		j;
 
-	i = 0;
-	printf("HEYYYYYYY\n");
-	while(map[++i] && lines_value(game) == 0)
+	i = -1;
+	while (map[++i] && lines_value(game) == 0)
 	{
+		printf("map = %s\n", map[i]);
 		j = -1;
-		while(map[i][++j])
+		while (map[i][++j])
 		{
-			printf("-----------test---\n");
 			if(map[i][j] == '0' || player_exist(map[i][j]))
 			{
 				if (j > (int)ft_strlen(map[i + 1]) 
-					|| j > (int)ft_strlen(map[i - 1]))
+					|| j > (int)ft_strlen(map[i - 1]) || j == 0)
 					{
 						write(2, "Error Invalid map\n", 18);
 						exit(1);
@@ -100,7 +99,6 @@ void	map_pars(t_game *game, char *line, int fd)
 			game->map->W = ((int)ft_strlen(tmp));
 		game->map->map = map_create(game->map->map, tmp);//adv
 		line = get_next_line(fd);
-		printf("line = %s\n", line);
 	}
 }
 
@@ -111,6 +109,7 @@ void	file_reader(t_game *game, int fd)//not done
 	line = get_next_line(fd);
 	while (line)
 	{
+		printf("line = %s\n", line);
 		if (line[0] != '\n')
 		{
 			if (lines_pars(game, line))
@@ -122,4 +121,5 @@ void	file_reader(t_game *game, int fd)//not done
 		free(line);
 		line = get_next_line(fd);
 	}
+	printf("line 2 = %s\n", line);
 }
