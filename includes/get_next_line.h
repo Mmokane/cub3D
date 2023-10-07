@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmokane <mmokane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/16 14:58:58 by mmokane           #+#    #+#             */
-/*   Updated: 2023/10/06 04:42:36 by mmokane          ###   ########.fr       */
+/*   Created: 2022/11/10 13:50:16 by oubelhaj          #+#    #+#             */
+/*   Updated: 2023/10/06 17:15:52 by mmokane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,19 @@
 # define GET_NEXT_LINE_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 0
+#  define BUFFER_SIZE 10
 # endif
 
-# include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
-# include <limits.h>
+# include <unistd.h>
+# include <string.h>
 
-
-char	*ft_strjoin2(char *s1, char *s2);
-char	*ft_substr2(char const *s, unsigned int start, size_t len);
-char	*ft_strdup2(const char *s);
+char	*fill_buff(int fd);
 char	*get_next_line(int fd);
-size_t	ft_strlen2(const char *s);
-int		ft_strchr2(char *s);
-
+size_t	ft_strlen2(const char *str);
+char	*ft_strchr2(char *buff, char c);
+char	*ft_strjoin2(char *s1, char const *s2);
+char	*ft_substr2(char const *s, unsigned int start, size_t len);
 
 #endif

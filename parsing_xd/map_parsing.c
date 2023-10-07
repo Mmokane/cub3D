@@ -6,7 +6,7 @@
 /*   By: mmokane <mmokane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 04:29:36 by mmokane           #+#    #+#             */
-/*   Updated: 2023/10/06 05:18:17 by mmokane          ###   ########.fr       */
+/*   Updated: 2023/10/06 17:24:30 by mmokane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,6 @@ void	check_sides(char **map)//map_borders//done
 
 	j = 0;
 	i = 0;
-	printf("heyyyyyyyyyyyyyyyyy\n");
-	printf("%s\n", map[0]);
 	while (map[0][j] == ' ')
 		j++;
 	while (map[0][j] == '1')
@@ -93,7 +91,7 @@ void	texture_pars(t_game *game, char *line, int token, int i)//texture_parsing
 {
 	char	*path;
 
-	printf("ssssssssssssssssssss\n");
+	printf("%s\n", line);
 	space_skipper(line, &i);
 	path = ft_strdup(&line[i]);
 	exten_check(path, ".xpm\0");

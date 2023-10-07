@@ -5,84 +5,48 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmokane <mmokane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/16 15:06:54 by mmokane           #+#    #+#             */
-/*   Updated: 2023/10/06 04:42:31 by mmokane          ###   ########.fr       */
+/*   Created: 2022/11/13 17:06:56 by oubelhaj          #+#    #+#             */
+/*   Updated: 2023/10/06 17:17:17 by mmokane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/get_next_line.h"
 
-char	*ft_remains(char *line)
+char	*fill_and_join(int fd, char **saved, char *line, char *tmp)
 {
-	char	*str;
-	int		i;
-
-	i = 0;
-	while (line[i] != '\n' && line[i] != '\0')
-		i++;
-	str = ft_substr2(line, (i + 1), ft_strlen2(line));
-	free (line);
-	line = NULL;
-	return (str);
-}
-
-char	*ft_ret_line(char **line)
-{
-	int	i;
-
-	i = 0;
-	if (line[0][i] == '\0')
+	while (!ft_strchr2(*saved, '\n'))
 	{
-		free (*line);
-		*line = NULL;
-		return (NULL);
-	}
-	while (line[0][i] != '\n' && line[0][i] != '\0')
-		i++;
-	return (ft_substr2(*line, 0, (i + 1)));
-}
-
-char	*ft_read_line(int fd, char *line)
-{
-	char	*str;
-	ssize_t	i;
-
-	i = 1;
-	str = malloc(BUFFER_SIZE + 1);
-	if (!str)
-		return (0);
-	if (!line)
-		line = ft_strdup2("");
-	while (ft_strchr2(line) == 0 && i != 0)
-	{
-		i = read(fd, str, BUFFER_SIZE);
-		if (i < 0)
+		tmp = fill_buff(fd);
+		if (!tmp)
 		{
-			free (str);
-			free (line);
-			line = NULL;
-			return (NULL);
+			line = *saved;
+			*saved = NULL;
+			return (line);
 		}
-		str[i] = '\0';
-		line = ft_strjoin2(line, str);
+		*saved = ft_strjoin2(*saved, tmp);
+		free(tmp);
 	}
-	free (str);
+	line = ft_substr2(*saved, 0, ft_strchr2(*saved, '\n') - *saved + 1);
+	tmp = *saved;
+	*saved = ft_substr2(ft_strchr2(*saved, '\n') + 1, 0,
+			ft_strlen2(ft_strchr2(*saved, '\n')));
+	free(tmp);
 	return (line);
 }
 
 char	*get_next_line(int fd)
 {
-	static char	*line;
-	char		*str;
+	char		*tmp;
+	char		*line;
+	static char	*saved;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	tmp = NULL;
+	line = NULL;
+	if (read(fd, NULL, 0) == -1 || BUFFER_SIZE <= 0)
+	{
+		free(saved);
+		saved = NULL;
 		return (NULL);
-	line = ft_read_line(fd, line);
-	if (line == NULL)
-		return (NULL);
-	str = ft_ret_line(&line);
-	if (str == NULL)
-		return (NULL);
-	line = ft_remains(line);
-	return (str);
+	}
+	return (fill_and_join(fd, &saved, line, tmp));
 }
