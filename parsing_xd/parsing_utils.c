@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmokane <mmokane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/19 04:27:19 by mmokane           #+#    #+#             */
-/*   Updated: 2023/10/07 11:47:40 by mmokane          ###   ########.fr       */
+/*   Created: 2023/10/11 16:05:08 by mmokane           #+#    #+#             */
+/*   Updated: 2023/10/11 16:13:28 by mmokane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	space_skipper(char *s, int *i)
 		(*i)++;
 }
 
-void	check_nums(char *line)// check_lenght
+void	check_nums(char *line)
 {
 	int		i;
 	char	**f;
@@ -26,16 +26,13 @@ void	check_nums(char *line)// check_lenght
 	i = 0;
 	f = ft_split(line, ',');
 	if (!f)
-	{
-		write(2, "Error\n", 6);
-		exit(1);
-	}
+		ft_putstr_fd2("Error\n", 2);
 	while (f[i])
 		i++;
 	if (i != 3)
 		ft_putstr_fd2("Error\n", 2);
-	// free_loop(f);
 }
+
 void	data_init(t_game *game)
 {
 	game->map->we = NULL;
@@ -43,8 +40,8 @@ void	data_init(t_game *game)
 	game->map->ea = NULL;
 	game->map->so = NULL;
 	game->map->dr = NULL;
-	game->map->F = 0;
-	game->map->C = 0;
+	game->map->f = 0;
+	game->map->c = 0;
 	game->player->x = 0;
 	game->player->y = 0;
 }
@@ -52,17 +49,11 @@ void	data_init(t_game *game)
 void	init(t_game *game)
 {
 	if (!game)
-	{
-		write(2, "Error\n", 6);
-		exit(1);
-	}
+		ft_putstr_fd2("Error (init)\n", 2);
 	game->player = (t_player *)malloc(sizeof(t_player));
 	game->map = (t_map *)malloc(sizeof(t_map));
-	game->map->map = ft_calloc(1, sizeof(char *));// recheck for leaks "calloc"
+	game->map->map = ft_calloc(1, sizeof(char *));
 	if (!game->map->map || !game->map)
-	{
-		write(2, "Error\n", 6);
-		exit(1);
-	}
+		ft_putstr_fd2("Error (init)\n", 2);
 	data_init(game);
 }

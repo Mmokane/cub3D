@@ -6,7 +6,7 @@
 /*   By: mmokane <mmokane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 04:29:36 by mmokane           #+#    #+#             */
-/*   Updated: 2023/10/07 11:49:40 by mmokane          ###   ########.fr       */
+/*   Updated: 2023/10/11 16:29:55 by mmokane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ void	ft_putstr_fd2(char *s, int fd)
 	write(fd, s, ft_strlen(s));
 	exit (1);
 }
-int	map_tokens(char *arg)//check name // done
+
+int	map_tokens(char *arg)
 {
 	if (!ft_strncmp(arg, "NO", 3))
 		return (T_NO);
@@ -52,7 +53,7 @@ int	lines_pars(t_game *game, char *line)
 	while (line[i] && line[i] != ' ' && line[i] != '\t')
 		i++;
 	arg = ft_substr(line, j, i - j);
-	token = map_tokens(arg);//check_arg
+	token = map_tokens(arg);
 	if (token == T_Error)
 		ft_putstr_fd2("Error: Invalid token\n", 2);
 	else if (token == T_F || token == T_C)
@@ -63,7 +64,7 @@ int	lines_pars(t_game *game, char *line)
 	return (0);
 }
 
-void	check_sides(char **map)//map_borders//done
+void	check_sides(char **map)
 {
 	int	j;
 	int	i;
@@ -88,7 +89,7 @@ void	check_sides(char **map)//map_borders//done
 	}
 }
 
-void	texture_pars(t_game *game, char *line, int token, int i)//texture_parsing
+void	texture_pars(t_game *game, char *line, int token, int i)
 {
 	char	*path;
 
@@ -104,9 +105,6 @@ void	texture_pars(t_game *game, char *line, int token, int i)//texture_parsing
 	else if (token == T_SO && !game->map->so)
 		game->map->so = path;
 	else
-	{
-		write(2, "Error: wrong texture\n", 21);
-		exit(1);
-	}
+		ft_putstr_fd2("Error: wrong textures\n", 2);
 	free(line);
 }

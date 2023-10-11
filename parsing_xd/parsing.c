@@ -6,7 +6,7 @@
 /*   By: mmokane <mmokane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 04:01:37 by mmokane           #+#    #+#             */
-/*   Updated: 2023/10/07 11:48:21 by mmokane          ###   ########.fr       */
+/*   Updated: 2023/10/11 16:12:46 by mmokane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	argslen(char **args)
 		i++;
 	return (i + 1);
 }
+
 void	player_init(t_game *game, char **map, int y, int x)
 {
 	if (game->player->x != 0 || game->player->y != 0)
@@ -44,25 +45,26 @@ void	checker(t_game *game)
 {
 	if (!game->map->no || !game->map->so || !game->map->we || !game->map->ea)
 		ft_putstr_fd2("Missing texture\n", 2);
-	else if (game->map->F == -1 || game->map->C == -1)
+	else if (game->map->f == -1 || game->map->c == -1)
 		ft_putstr_fd2("Missing color\n", 2);
 	else if (!game->map->map[0])
 		ft_putstr_fd2("Missing map\n", 2);
 	else if (game->player->x == 0 || game->player->y == 0)
 		ft_putstr_fd2("Missing player\n", 2);
 }
+
 char	**map_create(char **str, char *arg)
 {
-	int i;
-	int args_len;
-	char **args;
-	
+	int		i;
+	int		args_len;
+	char	**args;
+
 	if (!str[0] || !str)
 	{
 		args = (char **)malloc(sizeof(char *) * 2);
 		args[0] = ft_strdup(arg);
 		args[1] = NULL;
-		return(args);
+		return (args);
 	}
 	args_len = argslen(str);
 	args = (char **)malloc(sizeof(char *) * (args_len + 1));
@@ -77,20 +79,18 @@ char	**map_create(char **str, char *arg)
 	return (args);
 }
 
-
 void	parsing(t_game *game, char *str)
 {
-	int fd;
+	int	fd;
 
 	exten_check(str, ".cub");
 	fd = open(str, O_RDONLY);
 	if (fd < 0)
 		ft_putstr_fd2("Error, cant open file\n", 2);
-	init(game);//need to init data here :3 dont forget
+	init(game);
 	file_reader(game, fd);
 	close(fd);
 	final_check(game, game->map->map);
 	checker(game);
 	check_sides(game->map->map);
 }
-

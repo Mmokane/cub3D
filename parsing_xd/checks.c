@@ -6,13 +6,13 @@
 /*   By: mmokane <mmokane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 02:36:24 by mmokane           #+#    #+#             */
-/*   Updated: 2023/10/07 11:50:54 by mmokane          ###   ########.fr       */
+/*   Updated: 2023/10/11 16:22:19 by mmokane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-int	map_check(char *line)//is map//done
+int	map_check(char *line)
 {
 	int	i;
 
@@ -22,7 +22,7 @@ int	map_check(char *line)//is map//done
 		if (line[i] != ' ' && line[i] != 'S' && line[i] != 'N'
 			&& line[i] != '0' && line[i] != 'E'
 			&& line[i] != '\n' && line[i] != '1'
-			&& line[i] != 'W')
+			&& line[i] != 'W' && line[i] != '\t')
 			return (0);
 		i++;
 	}
@@ -40,9 +40,9 @@ void	final_check(t_game *game, char **map)
 		j = -1;
 		while (map[i][++j])
 		{
-			if(map[i][j] == '0' || player_exist(map[i][j]))
+			if (map[i][j] == '0' || player_exist(map[i][j]))
 			{
-				if (j > (int)ft_strlen(map[i + 1]) 
+				if (j > (int)ft_strlen(map[i + 1])
 					|| j > (int)ft_strlen(map[i - 1]) || j == 0)
 					ft_putstr_fd2("Error: Invalid map\n", 2);
 				if (map[i][j - 1] == ' ' || map[i][j - 1] == '\0'
@@ -58,9 +58,9 @@ void	final_check(t_game *game, char **map)
 	}
 }
 
-void	exten_check(char *str, char *extension)//done
+void	exten_check(char *str, char *extension)
 {
-	char *ext;
+	char	*ext;
 
 	ext = ft_strrchr(str, '.');
 	if (!ext)
@@ -71,22 +71,22 @@ void	exten_check(char *str, char *extension)//done
 
 void	map_pars(t_game *game, char *line, int fd)
 {
-	char *tmp;
+	char	*tmp;
 
 	while (line)
 	{
 		if (!map_check(line))
 			ft_putstr_fd2("Error Invalid map\n", 2);
-		game->map->H++;
+		game->map->h++;
 		tmp = ft_strtrim(line, "\n");
-		if (game->map->W < ((int)ft_strlen(tmp)))
-			game->map->W = ((int)ft_strlen(tmp));
-		game->map->map = map_create(game->map->map, tmp);//adv
+		if (game->map->w < ((int)ft_strlen(tmp)))
+			game->map->w = ((int)ft_strlen(tmp));
+		game->map->map = map_create(game->map->map, tmp);
 		line = get_next_line(fd);
 	}
 }
 
-void	file_reader(t_game *game, int fd)//not done
+void	file_reader(t_game *game, int fd)
 {
 	char	*line;
 

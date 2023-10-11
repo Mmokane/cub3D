@@ -6,7 +6,7 @@
 #    By: mmokane <mmokane@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/16 02:38:17 by mmokane           #+#    #+#              #
-#    Updated: 2023/10/07 11:55:23 by mmokane          ###   ########.fr        #
+#    Updated: 2023/10/11 15:28:05 by mmokane          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ $(NAME) : $(OBJS)
 		@echo "\033[1;32m---- COMPILING! ----\033[0m"
 		@make -C libft
 		@cc $(CFLAGS) $(OBJS) libft/libft.a -o $(NAME)
-		@echo "\033[1;32m---- DONE! ----\033[0m"
+		@echo "\033[1;32m----   DONE!  ----\033[0m"
 
 .c.o	:
 		@$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
