@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmokane <mmokane@student.42.fr>            +#+  +:+       +#+        */
+/*   By: moskir <moskir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 04:01:37 by mmokane           #+#    #+#             */
-/*   Updated: 2023/10/11 16:12:46 by mmokane          ###   ########.fr       */
+/*   Updated: 2023/10/24 02:31:34 by moskir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ char	**map_create(char **str, char *arg)
 		args = (char **)malloc(sizeof(char *) * 2);
 		args[0] = ft_strdup(arg);
 		args[1] = NULL;
+		ft_free(str);
 		return (args);
 	}
 	args_len = argslen(str);
@@ -76,6 +77,7 @@ char	**map_create(char **str, char *arg)
 	}
 	args[i] = ft_strdup(arg);
 	args[i + 1] = NULL;
+	ft_free(str);
 	return (args);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmokane <mmokane@student.42.fr>            +#+  +:+       +#+        */
+/*   By: moskir <moskir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 02:34:54 by mmokane           #+#    #+#             */
-/*   Updated: 2023/10/11 15:54:29 by mmokane          ###   ########.fr       */
+/*   Updated: 2023/10/24 02:26:17 by moskir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,5 +100,8 @@ void	init(t_game *game);
 //////////////////////parsing.c//////////////////////
 char	**map_create(char **str, char *arg);
 void	parsing(t_game *game, char *str);
+
+//////////////////////utils.c////////////////////////
+void	ft_free(char **args);
 
 #endif

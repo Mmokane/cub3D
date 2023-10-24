@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checks.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmokane <mmokane@student.42.fr>            +#+  +:+       +#+        */
+/*   By: moskir <moskir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 02:36:24 by mmokane           #+#    #+#             */
-/*   Updated: 2023/10/11 16:22:19 by mmokane          ###   ########.fr       */
+/*   Updated: 2023/10/24 02:42:07 by moskir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,11 @@ void	map_pars(t_game *game, char *line, int fd)
 		if (game->map->w < ((int)ft_strlen(tmp)))
 			game->map->w = ((int)ft_strlen(tmp));
 		game->map->map = map_create(game->map->map, tmp);
+		free(line);
+		free(tmp);
 		line = get_next_line(fd);
 	}
+	
 }
 
 void	file_reader(t_game *game, int fd)

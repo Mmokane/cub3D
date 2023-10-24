@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmokane <mmokane@student.42.fr>            +#+  +:+       +#+        */
+/*   By: moskir <moskir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 16:05:08 by mmokane           #+#    #+#             */
-/*   Updated: 2023/10/11 16:13:28 by mmokane          ###   ########.fr       */
+/*   Updated: 2023/10/24 02:40:51 by moskir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,17 @@ void	space_skipper(char *s, int *i)
 void	check_nums(char *line)
 {
 	int		i;
-	char	**f;
+	char	**j;
 
 	i = 0;
-	f = ft_split(line, ',');
-	if (!f)
+	j = ft_split(line, ',');
+	if (!j)
 		ft_putstr_fd2("Error\n", 2);
-	while (f[i])
+	while (j[i])
 		i++;
 	if (i != 3)
 		ft_putstr_fd2("Error\n", 2);
+	ft_free(j);
 }
 
 void	data_init(t_game *game)
@@ -41,6 +42,8 @@ void	data_init(t_game *game)
 	game->map->so = NULL;
 	game->map->dr = NULL;
 	game->map->f = 0;
+	game->map->h = 0;
+	game->map->w = 0;
 	game->map->c = 0;
 	game->player->x = 0;
 	game->player->y = 0;

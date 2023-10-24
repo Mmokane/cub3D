@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mmokane <mmokane@student.42.fr>            +#+  +:+       +#+         #
+#    By: moskir <moskir@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/16 02:38:17 by mmokane           #+#    #+#              #
-#    Updated: 2023/10/11 15:28:05 by mmokane          ###   ########.fr        #
+#    Updated: 2023/10/24 02:33:58 by moskir           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ CFLAGS = -Wall -Werror -Wextra #-g3 -fsanitize=address
 SRCS =  parsing_xd/checks.c parsing_xd/map_parsing.c \
 		parsing_xd/parsing.c parsing_xd/map_parsing2.c \
 		parsing_xd/parsing_utils.c cub3d.c get_next_line/get_next_line.c \
-		get_next_line/get_next_line_utils.c \
+		get_next_line/get_next_line_utils.c parsing_xd/utils.c \
 		
 
 
