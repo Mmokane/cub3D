@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checks.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moskir <moskir@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmokane <mmokane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 02:36:24 by mmokane           #+#    #+#             */
-/*   Updated: 2023/10/24 02:42:07 by moskir           ###   ########.fr       */
+/*   Updated: 2023/11/02 22:06:45 by mmokane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@ void	final_check(t_game *game, char **map)
 				if (j > (int)ft_strlen(map[i + 1])
 					|| j > (int)ft_strlen(map[i - 1]) || j == 0)
 					ft_putstr_fd2("Error: Invalid map\n", 2);
-				if (map[i][j - 1] == ' ' || map[i][j - 1] == '\0'
-					|| map[i][j + 1] == ' ' || map[i][j + 1] == '\0'
-					|| map[i - 1][j] == ' ' || map[i - 1][j] == '\0'
-					|| map[i + 1][j] == ' ' || map[i + 1][j] == '\0')
+				if (map[i][j - 1] == '\0'
+					|| map[i][j + 1] == '\0'
+					|| map[i - 1][j] == '\0'
+					||  map[i + 1][j] == '\0')
 					ft_putstr_fd2("Error: Invalid map\n", 2);
 			}
 			if (map[i][j] == 'S' || map[i][j] == 'N'

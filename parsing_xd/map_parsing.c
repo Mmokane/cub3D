@@ -6,7 +6,7 @@
 /*   By: mmokane <mmokane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 04:29:36 by mmokane           #+#    #+#             */
-/*   Updated: 2023/10/11 16:29:55 by mmokane          ###   ########.fr       */
+/*   Updated: 2023/11/02 22:06:52 by mmokane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	check_sides(char **map)
 		j++;
 	while (map[0][j] == '1')
 		j++;
-	if (map[0][j] != '1' && map[0][j] != '\0' && map[0][j] != ' ')
+	if (map[0][j] != '1' && map[0][j] != '\0' && map[0][j] != ' ' )
 	{
 		write(2, "Error: Invalid map\n", 19);
 		exit(1);
@@ -83,7 +83,7 @@ void	check_sides(char **map)
 	while (map[i])
 	{
 		if (map[i][0] == '\0' || map[i][0] == '\t'
-			|| map[i][0] == '\n')
+			|| map[i][0] == '\n' )
 			ft_putstr_fd2("Error: Invalid map\n", 2);
 		i++;
 	}
