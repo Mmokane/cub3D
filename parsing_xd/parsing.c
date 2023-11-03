@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moskir <moskir@student.42.fr>              +#+  +:+       +#+        */
+/*   By: oubelhaj <oubelhaj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 04:01:37 by mmokane           #+#    #+#             */
-/*   Updated: 2023/10/24 02:31:34 by moskir           ###   ########.fr       */
+/*   Updated: 2023/11/03 13:57:45 by oubelhaj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,32 +24,32 @@ int	argslen(char **args)
 	return (i + 1);
 }
 
-void	player_init(t_game *game, char **map, int y, int x)
+void	player_init(t_data *data, char **map, int y, int x)
 {
-	if (game->player->x != 0 || game->player->y != 0)
+	if (data->player->x != 0 || data->player->y != 0)
 		ft_putstr_fd2("Error Multiple players\n", 2);
-	game->player->x = (x * TILE_SIZE) + 16;
-	game->player->y = (y * TILE_SIZE) + 16;
+	data->player->x = (x * TILE_SIZE) + 16;
+	data->player->y = (y * TILE_SIZE) + 16;
 	if (map[y][x] == 'N')
-		game->player->dir = 'N';
+		data->player->dir = 'N';
 	else if (map[y][x] == 'S')
-		game->player->dir = 'S';
+		data->player->dir = 'S';
 	else if (map[y][x] == 'E')
-		game->player->dir = 'E';
+		data->player->dir = 'E';
 	else if (map[y][x] == 'W')
-		game->player->dir = 'W';
-	game->map->map[y][x] = '0';
+		data->player->dir = 'W';
+	data->map->map[y][x] = '0';
 }
 
-void	checker(t_game *game)
+void	checker(t_data *data)
 {
-	if (!game->map->no || !game->map->so || !game->map->we || !game->map->ea)
+	if (!data->map->no || !data->map->so || !data->map->we || !data->map->ea)
 		ft_putstr_fd2("Missing texture\n", 2);
-	else if (game->map->f == -1 || game->map->c == -1)
+	else if (data->map->f == -1 || data->map->c == -1)
 		ft_putstr_fd2("Missing color\n", 2);
-	else if (!game->map->map[0])
+	else if (!data->map->map[0])
 		ft_putstr_fd2("Missing map\n", 2);
-	else if (game->player->x == 0 || game->player->y == 0)
+	else if (data->player->x == 0 || data->player->y == 0)
 		ft_putstr_fd2("Missing player\n", 2);
 }
 
@@ -81,7 +81,7 @@ char	**map_create(char **str, char *arg)
 	return (args);
 }
 
-void	parsing(t_game *game, char *str)
+void	parsing(t_data *data, char *str)
 {
 	int	fd;
 
@@ -89,10 +89,10 @@ void	parsing(t_game *game, char *str)
 	fd = open(str, O_RDONLY);
 	if (fd < 0)
 		ft_putstr_fd2("Error, cant open file\n", 2);
-	init(game);
-	file_reader(game, fd);
+	init(data);
+	file_reader(data, fd);
 	close(fd);
-	final_check(game, game->map->map);
-	checker(game);
-	check_sides(game->map->map);
+	final_check(data, data->map->map);
+	checker(data);
+	check_sides(data->map->map);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parsing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmokane <mmokane@student.42.fr>            +#+  +:+       +#+        */
+/*   By: oubelhaj <oubelhaj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 04:29:36 by mmokane           #+#    #+#             */
-/*   Updated: 2023/11/02 22:06:52 by mmokane          ###   ########.fr       */
+/*   Updated: 2023/11/03 13:57:45 by oubelhaj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	map_tokens(char *arg)
 		return (T_Error);
 }
 
-int	lines_pars(t_game *game, char *line)
+int	lines_pars(t_data *data, char *line)
 {
 	int		i;
 	int		j;
@@ -57,9 +57,9 @@ int	lines_pars(t_game *game, char *line)
 	if (token == T_Error)
 		ft_putstr_fd2("Error: Invalid token\n", 2);
 	else if (token == T_F || token == T_C)
-		color_pars(game, ft_strtrim(line, "\n"), token, i);
+		color_pars(data, ft_strtrim(line, "\n"), token, i);
 	else
-		texture_pars(game, ft_strtrim(line, "\n"), token, i);
+		texture_pars(data, ft_strtrim(line, "\n"), token, i);
 	free(arg);
 	return (0);
 }
@@ -89,21 +89,21 @@ void	check_sides(char **map)
 	}
 }
 
-void	texture_pars(t_game *game, char *line, int token, int i)
+void	texture_pars(t_data *data, char *line, int token, int i)
 {
 	char	*path;
 
 	space_skipper(line, &i);
 	path = ft_strdup(&line[i]);
 	exten_check(path, ".xpm\0");
-	if (token == T_EA && !game->map->ea)
-		game->map->ea = path;
-	else if (token == T_NO && !game->map->no)
-		game->map->no = path;
-	else if (token == T_WE && !game->map->we)
-		game->map->we = path;
-	else if (token == T_SO && !game->map->so)
-		game->map->so = path;
+	if (token == T_EA && !data->map->ea)
+		data->map->ea = path;
+	else if (token == T_NO && !data->map->no)
+		data->map->no = path;
+	else if (token == T_WE && !data->map->we)
+		data->map->we = path;
+	else if (token == T_SO && !data->map->so)
+		data->map->so = path;
 	else
 		ft_putstr_fd2("Error: wrong textures\n", 2);
 	free(line);

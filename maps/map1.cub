@@ -1,16 +1,14 @@
-NO textures/no.xpm
-SO textures/so.xpm
-WE textures/we_box.xpm
-EA textures/ea.xpm
+NO ../textures/NO.xpm
+SO ../textures/SO.xpm
+WE ../textures/WE.xpm
+EA ../textures/EA.xpm
 
-C 103, 193, 202
-F 125, 255, 140
-
-
+F 220,100,0
+C 225,30,0
 
 1                      1
   1111111111111111111111
- 100000000000000000110001
+ 100000100000000000110001
 1001111N010110011011101111
  101010101100011100010011
   11111  1111  11111111

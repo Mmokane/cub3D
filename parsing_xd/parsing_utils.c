@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moskir <moskir@student.42.fr>              +#+  +:+       +#+        */
+/*   By: oubelhaj <oubelhaj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 16:05:08 by mmokane           #+#    #+#             */
-/*   Updated: 2023/10/24 02:40:51 by moskir           ###   ########.fr       */
+/*   Updated: 2023/11/03 14:36:50 by oubelhaj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,29 +34,28 @@ void	check_nums(char *line)
 	ft_free(j);
 }
 
-void	data_init(t_game *game)
+void	data_init(t_data *data)
 {
-	game->map->we = NULL;
-	game->map->no = NULL;
-	game->map->ea = NULL;
-	game->map->so = NULL;
-	game->map->dr = NULL;
-	game->map->f = 0;
-	game->map->h = 0;
-	game->map->w = 0;
-	game->map->c = 0;
-	game->player->x = 0;
-	game->player->y = 0;
+	data->map->we = NULL;
+	data->map->no = NULL;
+	data->map->ea = NULL;
+	data->map->so = NULL;
+	data->map->f = 0;
+	data->map->h = 0;
+	data->map->w = 0;
+	data->map->c = 0;
+	data->player->x = 0;
+	data->player->y = 0;
 }
 
-void	init(t_game *game)
+void	init(t_data *data)
 {
-	if (!game)
+	if (!data)
 		ft_putstr_fd2("Error (init)\n", 2);
-	game->player = (t_player *)malloc(sizeof(t_player));
-	game->map = (t_map *)malloc(sizeof(t_map));
-	game->map->map = ft_calloc(1, sizeof(char *));
-	if (!game->map->map || !game->map)
+	data->player = (t_player *)malloc(sizeof(t_player));
+	data->map = (t_map *)malloc(sizeof(t_map));
+	data->map->map = ft_calloc(1, sizeof(char *));
+	if (!data->map->map || !data->map)
 		ft_putstr_fd2("Error (init)\n", 2);
-	data_init(game);
+	data_init(data);
 }
