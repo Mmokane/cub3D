@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moskir <moskir@student.42.fr>              +#+  +:+       +#+        */
+/*   By: oubelhaj <oubelhaj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 02:23:16 by moskir            #+#    #+#             */
-/*   Updated: 2023/10/24 02:24:04 by moskir           ###   ########.fr       */
+/*   Updated: 2023/11/04 20:04:24 by oubelhaj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-void	ft_free(char **args) // free loop
+void	ft_free(char **args)
 {
 	int	i;
 

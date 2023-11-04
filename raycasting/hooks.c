@@ -6,7 +6,7 @@
 /*   By: oubelhaj <oubelhaj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 14:28:12 by oubelhaj          #+#    #+#             */
-/*   Updated: 2023/11/03 17:24:25 by oubelhaj         ###   ########.fr       */
+/*   Updated: 2023/11/04 19:48:08 by oubelhaj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,13 @@ int	key_press(int keycode, t_data *data)
 		data->player->walk_direction = 1;
 	else if (keycode == S_KEY)
 		data->player->walk_direction = -1;
-	else if (keycode == A_KEY || keycode == LEFT)
+	else if (keycode == A_KEY)
+		data->player->straf_direction = -1;
+	else if (keycode == D_KEY)
+		data->player->straf_direction = 1;
+	else if (keycode == LEFT)
 		data->player->turn_direction = -1;
-	else if (keycode == D_KEY || keycode == RIGHT)
+	else if (keycode == RIGHT)
 		data->player->turn_direction = 1;
 	else if (keycode == ESC_KEY)
 		close_game(data);
@@ -33,9 +37,17 @@ int	key_release(int keycode, t_data *data)
 		data->player->walk_direction = 0;
 	else if (keycode == S_KEY)
 		data->player->walk_direction = 0;
-	else if (keycode == A_KEY || keycode == LEFT)
+	else if (keycode == A_KEY)
+	{
+		data->player->straf_direction = 0;
 		data->player->turn_direction = 0;
-	else if (keycode == D_KEY || keycode == RIGHT)
+	}
+	else if (keycode == D_KEY)
+	{
+		data->player->straf_direction = 0;
+		data->player->turn_direction = 0;
+	}
+	else if (keycode == LEFT || keycode == RIGHT)
 		data->player->turn_direction = 0;
 	return (0);
 }

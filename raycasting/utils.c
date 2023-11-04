@@ -6,7 +6,7 @@
 /*   By: oubelhaj <oubelhaj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 16:29:13 by oubelhaj          #+#    #+#             */
-/*   Updated: 2023/11/03 17:30:08 by oubelhaj         ###   ########.fr       */
+/*   Updated: 2023/11/04 12:10:18 by oubelhaj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
 	char	*dst;
 
-	if (x < 0 || x >= data->win_width || y < 0 || y >= data->win_height)
+	if (x < 0 || x >= WIDTH || y < 0 || y >= HEIGHT)
 		return ;
 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
@@ -35,7 +35,7 @@ int	is_wall(double x, double y, t_data *data)
 	int		map_x;
 	int		map_y;
 
-	if (x < 0 || x > data->win_width || y < 0 || y > data->win_height)
+	if (x < 0 || x > data->map_width || y < 0 || y > data->map_height)
 		return (1);
 	map_x = (int)x / TILE_SIZE;
 	map_y = (int)y / TILE_SIZE;
@@ -52,10 +52,10 @@ void	my_mlx_clear_image(t_data *data)
 	int	j;
 
 	i = 0;
-	while (i < data->win_height)
+	while (i < HEIGHT)
 	{
 		j = 0;
-		while (j < data->win_width)
+		while (j < WIDTH)
 		{
 			my_mlx_pixel_put(data, i, j, 0);
 			j++;

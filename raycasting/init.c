@@ -6,7 +6,7 @@
 /*   By: oubelhaj <oubelhaj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 14:29:04 by oubelhaj          #+#    #+#             */
-/*   Updated: 2023/11/03 17:29:23 by oubelhaj         ###   ########.fr       */
+/*   Updated: 2023/11/04 20:06:29 by oubelhaj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	init_ray(t_ray *ray, double ray_angle)
 	ray->is_right = ray->angle <= M_PI_2 || ray->angle >= 1.5 * M_PI;
 	ray->is_up = !ray->is_down;
 	ray->is_left = !ray->is_right;
-	ray->dist_projection_plane = 0;
+	ray->dist_proj_plane = 0;
 	ray->wall_strip_h = 0;
 	ray->wall_cords = malloc(sizeof(t_wall));
 	ray->wall_cords->bot_pix = 0;
@@ -32,10 +32,11 @@ void	init_ray(t_ray *ray, double ray_angle)
 
 void	init_player_data(t_data *data)
 {
+	data->player->straf_direction = 0;
 	data->player->fov = 60 * (M_PI / 180);
 	data->player->walk_direction = 0;
 	data->player->turn_direction = 0;
-	data->player->move_speed = 5.0;
+	data->player->move_speed = 8.0;
 	data->player->rotation_speed = 3 * (M_PI / 180);
 	data->player->rot_angle = 0;
 	if (data->player->dir == 'N')
@@ -49,12 +50,12 @@ void	init_player_data(t_data *data)
 void	init_mlx_data(t_data *data)
 {
 	data->mlx = mlx_init();
-	data->win_width = data->map->w * TILE_SIZE;
-	data->win_height = data->map->h * TILE_SIZE;
-	data->num_of_rays = data->win_width;
-	data->mlx_win = mlx_new_window(data->mlx, data->win_width,
-			data->win_height, "cub3D");
-	data->img = mlx_new_image(data->mlx, data->win_width, data->win_height);
+	data->map_width = data->map->w * TILE_SIZE;
+	data->map_height = data->map->h * TILE_SIZE;
+	data->num_of_rays = WIDTH;
+	data->mlx_win = mlx_new_window(data->mlx, WIDTH,
+			HEIGHT, "cub3D");
+	data->img = mlx_new_image(data->mlx, WIDTH, HEIGHT);
 	data->addr = mlx_get_data_addr(data->img, &data->bits_per_pixel,
 			&data->line_length, &data->endian);
 }

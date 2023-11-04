@@ -6,7 +6,7 @@
 /*   By: oubelhaj <oubelhaj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 02:36:24 by mmokane           #+#    #+#             */
-/*   Updated: 2023/11/03 13:57:45 by oubelhaj         ###   ########.fr       */
+/*   Updated: 2023/11/04 20:04:04 by oubelhaj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	final_check(t_data *data, char **map)
 				if (map[i][j - 1] == '\0'
 					|| map[i][j + 1] == '\0'
 					|| map[i - 1][j] == '\0'
-					||  map[i + 1][j] == '\0')
+					|| map[i + 1][j] == '\0')
 					ft_putstr_fd2("Error: Invalid map\n", 2);
 			}
 			if (map[i][j] == 'S' || map[i][j] == 'N'
@@ -86,7 +86,6 @@ void	map_pars(t_data *data, char *line, int fd)
 		free(tmp);
 		line = get_next_line(fd);
 	}
-	
 }
 
 void	file_reader(t_data *data, int fd)

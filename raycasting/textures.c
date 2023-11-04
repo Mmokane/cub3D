@@ -6,7 +6,7 @@
 /*   By: oubelhaj <oubelhaj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 14:30:29 by oubelhaj          #+#    #+#             */
-/*   Updated: 2023/11/03 17:12:21 by oubelhaj         ###   ########.fr       */
+/*   Updated: 2023/11/04 19:59:01 by oubelhaj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,51 +14,56 @@
 
 int	get_textures(t_ray *ray)
 {
-	if (ray->is_down)
-		return (SO);
-	else if (ray->is_up)
-		return (NO);
-	else if (ray->is_left)
+	if (ray->hit_vert && ray->is_left)
 		return (WE);
-	return (EA);
+	else if (ray->hit_vert && ray->is_right)
+		return (EA);
+	else if (!ray->hit_vert && ray->is_up)
+		return (NO);
+	return (SO);
 }
 
-int get_texture_pixel_color(int x, int y, t_data *data)
+int	get_texture_pixel_color(int x, int y, t_data *data, int n)
 {
-    int color;
+	int	offset;
+	int	color;
 
-    if (x < 0 || y < 0 || x > TEXTURE_WIDTH || y > TEXTURE_HEIGHT)
-        return (0); // error
-    // Calculate the color offset in the image data based on the (x, y) coordinates
-    // printf("%d\n", data->textures[0].bits_per_pixel / 8);
-    // exit(1);
-    int offset = (y * TEXTURE_WIDTH + x) * (data->textures[0].bits_per_pixel / 8);
-
-    // Read the color from the image data
-    if (offset >= 0 && offset < TEXTURE_WIDTH * TEXTURE_HEIGHT * (data->textures[0].bits_per_pixel / 8))
-    {
-        color = *(int *)(data->textures[0].addr + offset);
-    }
-    else
-    {
-        // Return a default color if the (x, y) coordinates are out of bounds
-        color = 0x000000; // Default to black
-    }
-
-    return color;
+	if (x < 0 || y < 0 || x > TEXTURE_WIDTH || y > TEXTURE_HEIGHT)
+		return (0);
+	offset = (y * TEXTURE_WIDTH + x) * (data->tex[n].bits_per_pixel / 8);
+	if (offset >= 0 && offset < TEXTURE_WIDTH * TEXTURE_HEIGHT
+		* (data->tex[n].bits_per_pixel / 8))
+		color = *(int *)(data->tex[n].addr + offset);
+	else
+		color = 0x000000;
+	return (color);
 }
 
 void	load_textures(t_data *data)
 {
-	data->textures = malloc(sizeof(t_textures) * 4);
-
-	data->textures[EA].img = mlx_xpm_file_to_image(data->mlx, "/Users/oubelhaj/Desktop/mmokane/textures/Stone1.xpm", &data->textures[EA].width, &data->textures[EA].height);
-	// data->textures[NO].img = mlx_xpm_file_to_image(data->mlx, "../textures/Stone2.xpm", &data->textures[NO].width, &data->textures[NO].height);
-	// data->textures[SO].img = mlx_xpm_file_to_image(data->mlx, "../textures/Stone2.xpm", &data->textures[SO].width, &data->textures[SO].height);
-	// data->textures[WE].img = mlx_xpm_file_to_image(data->mlx, "../textures/Stone2.xpm", &data->textures[WE].width, &data->textures[WE].height);
-
-	data->textures[EA].addr = mlx_get_data_addr(data->textures[EA].img, &data->textures[EA].bits_per_pixel, &data->textures[EA].line_length, &data->textures[EA].endian);
-	// data->textures[NO].addr = mlx_get_data_addr(data->textures[NO].img, &data->textures[NO].bits_per_pixel, &data->textures[NO].line_length, &data->textures[NO].endian);
-	// data->textures[SO].addr = mlx_get_data_addr(data->textures[SO].img, &data->textures[SO].bits_per_pixel, &data->textures[SO].line_length, &data->textures[SO].endian);
-	// data->textures[WE].addr = mlx_get_data_addr(data->textures[WE].img, &data->textures[WE].bits_per_pixel, &data->textures[WE].line_length, &data->textures[WE].endian);
+	data->tex = malloc(sizeof(t_textures) * 4);
+	data->tex[EA].img = mlx_xpm_file_to_image(data->mlx,
+			"./textures/Stone1.xpm", &data->tex[EA].width,
+			&data->tex[EA].height);
+	data->tex[NO].img = mlx_xpm_file_to_image(data->mlx,
+			"./textures/SO.xpm", &data->tex[NO].width,
+			&data->tex[NO].height);
+	data->tex[SO].img = mlx_xpm_file_to_image(data->mlx,
+			"./textures/hilter.xpm", &data->tex[SO].width,
+			&data->tex[SO].height);
+	data->tex[WE].img = mlx_xpm_file_to_image(data->mlx,
+			"./textures/Stone2.xpm", &data->tex[WE].width,
+			&data->tex[WE].height);
+	data->tex[EA].addr = mlx_get_data_addr(data->tex[EA].img,
+			&data->tex[EA].bits_per_pixel, &data->tex[EA].line_length,
+			&data->tex[EA].endian);
+	data->tex[NO].addr = mlx_get_data_addr(data->tex[NO].img,
+			&data->tex[NO].bits_per_pixel, &data->tex[NO].line_length,
+			&data->tex[NO].endian);
+	data->tex[SO].addr = mlx_get_data_addr(data->tex[SO].img,
+			&data->tex[SO].bits_per_pixel, &data->tex[SO].line_length,
+			&data->tex[SO].endian);
+	data->tex[WE].addr = mlx_get_data_addr(data->tex[WE].img,
+			&data->tex[WE].bits_per_pixel, &data->tex[WE].line_length,
+			&data->tex[WE].endian);
 }

@@ -6,7 +6,7 @@
 /*   By: oubelhaj <oubelhaj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 02:34:54 by mmokane           #+#    #+#             */
-/*   Updated: 2023/11/03 17:06:44 by oubelhaj         ###   ########.fr       */
+/*   Updated: 2023/11/04 20:06:29 by oubelhaj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@
 # define RIGHT 124
 # define ESC_KEY 53
 # define RADIUS 2.0
+# define WIDTH 1080 
+# define HEIGHT 720
 # define TEXTURE_HEIGHT 64
 # define TEXTURE_WIDTH 64
 # define EA 0
@@ -70,7 +72,7 @@ typedef struct s_map
 	int		w;
 }	t_map;
 
-typedef struct	s_cords
+typedef struct s_cords
 {
 	double	x_intercept;
 	double	y_intercept;
@@ -79,7 +81,7 @@ typedef struct	s_cords
 	double	hit;
 }	t_cords;
 
-typedef struct	s_point
+typedef struct s_point
 {
 	int				x;
 	int				y;
@@ -92,7 +94,7 @@ typedef struct s_wall
 	float	bot_pix;
 }		t_wall;
 
-typedef struct	s_textures
+typedef struct s_textures
 {
 	void	*img;
 	void	*addr;
@@ -103,7 +105,7 @@ typedef struct	s_textures
 	int		endian;
 }		t_textures;
 
-typedef struct	s_ray
+typedef struct s_ray
 {
 	double	angle;
 	double	wall_hit_x;
@@ -121,7 +123,7 @@ typedef struct	s_ray
 	double	x_step_v;
 	double	y_step_h;
 	double	y_step_v;
-	float	dist_projection_plane;
+	float	dist_proj_plane;
 	float	wall_strip_h;
 	int		hit_vert;
 	t_wall	*wall_cords;
@@ -138,6 +140,7 @@ typedef struct s_player
 	double	move_speed;
 	double	rotation_speed;
 	double	rot_angle;
+	double	straf_direction;
 }	t_player;
 
 typedef struct s_data
@@ -149,12 +152,12 @@ typedef struct s_data
 	int			bits_per_pixel;
 	int			line_length;
 	int			endian;
-	int			win_width;
-	int			win_height;
+	int			map_width;
+	int			map_height;
 	int			num_of_rays;
 	t_ray		*rays;
 	t_player	*player;
-	t_textures	*textures;
+	t_textures	*tex;
 	t_map		*map;
 }	t_data;
 
@@ -193,9 +196,10 @@ void	parsing(t_data *data, char *str);
 void	ft_free(char **args);
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
-
-char	**ft_split(char const *s, char c);
-char	*ft_strdup(const char *s1);
+int		is_wall(double x, double y, t_data *data);
+double	get_distance(int px, int py, int hx, int hy);
+double	norm_angle(double angle);
+void	my_mlx_clear_image(t_data *data);
 
 int		key_press(int keycode, t_data *data);
 int		key_release(int keycode, t_data *data);
@@ -205,20 +209,14 @@ void	init_ray(t_ray *ray, double ray_angle);
 void	init_player_data(t_data *data);
 void	init_mlx_data(t_data *data);
 
-double	get_distance(int px, int py, int hx, int hy);
-
-void	draw_2d_map(t_data *data);
-void	render_player(t_data *data);
 void	horizontal_intersections(t_ray *ray, t_data *data, t_cords *horz);
 void	vertical_intersections(t_ray *ray, t_data *data, t_cords *vert);
-int		is_wall(double x, double y, t_data *data);
-void    distance_to_wall(t_ray *ray, t_data *data, t_cords horz, t_cords vert);
-void    get_ray_data(t_data *data, t_ray *ray);
-int		get_texture_pixel_color(int x, int y, t_data *data);
-int		get_textures(t_ray *ray);
-void	load_textures(t_data *data);
+void	distance_to_wall(t_ray *ray, t_data *data, t_cords horz, t_cords vert);
+void	get_ray_data(t_data *data, t_ray *ray);
 void	cast_rays(t_data *data);
-double	norm_angle(double angle);
-void	my_mlx_clear_image(t_data *data);
+
+void	load_textures(t_data *data);
+int		get_textures(t_ray *ray);
+int		get_texture_pixel_color(int x, int y, t_data *data, int n);
 
 #endif
