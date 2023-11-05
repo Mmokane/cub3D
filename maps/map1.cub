@@ -1,10 +1,28 @@
 NO ./textures/Multibrick.xpm
+
+
 SO ./textures/Multibrick.xpm
+
+
+
 WE ./textures/Multibrick.xpm
+
+
+
 EA ./textures/Multibrick.xpm
 
+
 F 80, 80, 80
+
+
+
+
 C 40, 40, 40
+
+
+
+
+
 
 111111111111111
 100000100000001

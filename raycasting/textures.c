@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oubelhaj <oubelhaj@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmokane <mmokane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 14:30:29 by oubelhaj          #+#    #+#             */
-/*   Updated: 2023/11/05 18:25:05 by oubelhaj         ###   ########.fr       */
+/*   Updated: 2023/11/05 21:52:52 by mmokane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ void	load_textures(t_data *data)
 	data->tex[WE].img = mlx_xpm_file_to_image(data->mlx,
 			data->map->we, &data->tex[WE].width,
 			&data->tex[WE].height);
-
 	if (!data->tex[NO].img || !data->tex[SO].img || !data->tex[WE].img || !data->tex[EA].img)
 	{
 		ft_putendl_fd("Invalid texture path.", 2);
