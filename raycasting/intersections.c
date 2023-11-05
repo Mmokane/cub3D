@@ -6,26 +6,13 @@
 /*   By: oubelhaj <oubelhaj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 14:30:04 by oubelhaj          #+#    #+#             */
-/*   Updated: 2023/11/04 20:13:10 by oubelhaj         ###   ########.fr       */
+/*   Updated: 2023/11/04 22:12:52 by oubelhaj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-void	get_ray_data(t_data *data, t_ray *ray)
-{
-	ray->distance = ray->distance * cos(ray->angle - data->player->rot_angle);
-	ray->dist_proj_plane = (WIDTH / 2) / tan(data->player->fov / 2);
-	ray->wall_strip_h = (TILE_SIZE / ray->distance) * ray->dist_proj_plane;
-	ray->wall_cords->top_pix = (HEIGHT / 2) - (ray->wall_strip_h / 2);
-	if (ray->wall_cords->top_pix < 0)
-		ray->wall_cords->top_pix = 0;
-	ray->wall_cords->bot_pix = ray->wall_cords->top_pix + ray->wall_strip_h;
-	if (ray->wall_cords->bot_pix > HEIGHT)
-		ray->wall_cords->bot_pix = HEIGHT;
-}
-
-void	horizontal_intersections(t_ray *ray, t_data *data, t_cords *horz)
+void	setup_horz_intersec_params(t_ray *ray, t_data *data, t_cords *horz)
 {
 	double	arc_tan;
 
@@ -39,13 +26,18 @@ void	horizontal_intersections(t_ray *ray, t_data *data, t_cords *horz)
 	}
 	if (ray->is_down)
 	{
-		horz->y_intercept = (int)data->player->y / TILE_SIZE * TILE_SIZE
-			+ TILE_SIZE;
+		horz->y_intercept = (int)data->player->y / TILE_SIZE
+			* TILE_SIZE + TILE_SIZE;
 		horz->x_intercept = (data->player->y - horz->y_intercept)
 			* arc_tan + data->player->x;
 		horz->y_step = TILE_SIZE;
 	}
 	horz->x_step = -horz->y_step * arc_tan;
+}
+
+void	horizontal_intersections(t_ray *ray, t_data *data, t_cords *horz)
+{
+	setup_horz_intersec_params(ray, data, horz);
 	while (horz->x_intercept >= 0 && horz->x_intercept <= WIDTH * TILE_SIZE
 		&& horz->y_intercept >= 0 && horz->y_intercept <= HEIGHT * TILE_SIZE)
 	{
@@ -63,7 +55,7 @@ void	horizontal_intersections(t_ray *ray, t_data *data, t_cords *horz)
 	horz->hit = 0;
 }
 
-void	vertical_intersections(t_ray *ray, t_data *data, t_cords *vert)
+void	setup_vert_intersec_params(t_ray *ray, t_data *data, t_cords *vert)
 {
 	double	arc_tan;
 
@@ -77,18 +69,23 @@ void	vertical_intersections(t_ray *ray, t_data *data, t_cords *vert)
 	}
 	if (ray->is_right)
 	{
-		vert->x_intercept = (int)data->player->x / TILE_SIZE * TILE_SIZE
-			+ TILE_SIZE;
+		vert->x_intercept = (int)data->player->x / TILE_SIZE
+			* TILE_SIZE + TILE_SIZE;
 		vert->y_intercept = (data->player->x - vert->x_intercept)
 			* arc_tan + data->player->y;
 		vert->x_step = TILE_SIZE;
 	}
 	vert->y_step = -vert->x_step * arc_tan;
+}
+
+void	vertical_intersections(t_ray *ray, t_data *data, t_cords *vert)
+{
+	setup_vert_intersec_params(ray, data, vert);
 	while (vert->x_intercept >= 0 && vert->x_intercept <= WIDTH * TILE_SIZE
 		&& vert->y_intercept >= 0 && vert->y_intercept <= HEIGHT * TILE_SIZE)
 	{
-		if (is_wall(vert->x_intercept - (ray->is_left),
-				vert->y_intercept, data))
+		if (is_wall(vert->x_intercept - (ray->is_left), vert->y_intercept,
+				data))
 		{
 			vert->hit = 1;
 			return ;

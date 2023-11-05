@@ -6,7 +6,7 @@
 /*   By: oubelhaj <oubelhaj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 02:34:54 by mmokane           #+#    #+#             */
-/*   Updated: 2023/11/04 20:06:29 by oubelhaj         ###   ########.fr       */
+/*   Updated: 2023/11/05 20:35:53 by oubelhaj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,8 @@ typedef struct s_point
 
 typedef struct s_wall
 {
-	float	top_pix;
-	float	bot_pix;
+	double	top_pix;
+	double	bot_pix;
 }		t_wall;
 
 typedef struct s_textures
@@ -123,10 +123,10 @@ typedef struct s_ray
 	double	x_step_v;
 	double	y_step_h;
 	double	y_step_v;
-	float	dist_proj_plane;
-	float	wall_strip_h;
+	double	dist_proj_plane;
+	double	wall_strip_h;
 	int		hit_vert;
-	t_wall	*wall_cords;
+	t_wall	wall_cords;
 }		t_ray;
 
 typedef struct s_player

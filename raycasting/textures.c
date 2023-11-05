@@ -6,7 +6,7 @@
 /*   By: oubelhaj <oubelhaj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 14:30:29 by oubelhaj          #+#    #+#             */
-/*   Updated: 2023/11/04 19:59:01 by oubelhaj         ###   ########.fr       */
+/*   Updated: 2023/11/05 18:25:05 by oubelhaj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,23 @@ void	load_textures(t_data *data)
 {
 	data->tex = malloc(sizeof(t_textures) * 4);
 	data->tex[EA].img = mlx_xpm_file_to_image(data->mlx,
-			"./textures/Stone1.xpm", &data->tex[EA].width,
+			data->map->ea, &data->tex[EA].width,
 			&data->tex[EA].height);
 	data->tex[NO].img = mlx_xpm_file_to_image(data->mlx,
-			"./textures/SO.xpm", &data->tex[NO].width,
+			data->map->no, &data->tex[NO].width,
 			&data->tex[NO].height);
 	data->tex[SO].img = mlx_xpm_file_to_image(data->mlx,
-			"./textures/hilter.xpm", &data->tex[SO].width,
+			data->map->so, &data->tex[SO].width,
 			&data->tex[SO].height);
 	data->tex[WE].img = mlx_xpm_file_to_image(data->mlx,
-			"./textures/Stone2.xpm", &data->tex[WE].width,
+			data->map->we, &data->tex[WE].width,
 			&data->tex[WE].height);
+
+	if (!data->tex[NO].img || !data->tex[SO].img || !data->tex[WE].img || !data->tex[EA].img)
+	{
+		ft_putendl_fd("Invalid texture path.", 2);
+		exit(1);
+	}
 	data->tex[EA].addr = mlx_get_data_addr(data->tex[EA].img,
 			&data->tex[EA].bits_per_pixel, &data->tex[EA].line_length,
 			&data->tex[EA].endian);
@@ -66,4 +72,9 @@ void	load_textures(t_data *data)
 	data->tex[WE].addr = mlx_get_data_addr(data->tex[WE].img,
 			&data->tex[WE].bits_per_pixel, &data->tex[WE].line_length,
 			&data->tex[WE].endian);
+	if (!data->tex[NO].addr || !data->tex[SO].addr || !data->tex[WE].addr || !data->tex[EA].addr)
+	{
+		ft_putendl_fd("Invalid texture path.", 2);
+		exit(1);
+	}
 }

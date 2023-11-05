@@ -6,7 +6,7 @@
 /*   By: oubelhaj <oubelhaj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 01:05:28 by mmokane           #+#    #+#             */
-/*   Updated: 2023/11/04 20:03:07 by oubelhaj         ###   ########.fr       */
+/*   Updated: 2023/11/05 16:16:30 by oubelhaj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,10 @@ void	update_player_position(t_data *data)
 
 int	game_loop(t_data *data)
 {
-	int	i;
-
 	update_player_position(data);
 	cast_rays(data);
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img, 0, 0);
 	my_mlx_clear_image(data);
-	i = -1;
-	while (++i < data->num_of_rays)
-		free(data->rays[i].wall_cords);
 	return (0);
 }
 

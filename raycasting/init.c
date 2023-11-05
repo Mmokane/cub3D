@@ -6,7 +6,7 @@
 /*   By: oubelhaj <oubelhaj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 14:29:04 by oubelhaj          #+#    #+#             */
-/*   Updated: 2023/11/04 20:06:29 by oubelhaj         ###   ########.fr       */
+/*   Updated: 2023/11/05 18:48:42 by oubelhaj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,14 @@ void	init_ray(t_ray *ray, double ray_angle)
 	ray->wall_hit_x = 0;
 	ray->wall_hit_y = 0;
 	ray->distance = 0;
-	ray->is_down = ray->angle >= 0 && ray->angle <= M_PI;
-	ray->is_right = ray->angle <= M_PI_2 || ray->angle >= 1.5 * M_PI;
+	ray->is_down = (ray->angle >= 0 && ray->angle <= M_PI);
+	ray->is_right = (ray->angle <= M_PI_2 || ray->angle >= 1.5 * M_PI);
 	ray->is_up = !ray->is_down;
 	ray->is_left = !ray->is_right;
 	ray->dist_proj_plane = 0;
 	ray->wall_strip_h = 0;
-	ray->wall_cords = malloc(sizeof(t_wall));
-	ray->wall_cords->bot_pix = 0;
-	ray->wall_cords->top_pix = 0;
+	ray->wall_cords.bot_pix = 0;
+	ray->wall_cords.top_pix = 0;
 	ray->hit_vert = 0;
 }
 
@@ -36,8 +35,8 @@ void	init_player_data(t_data *data)
 	data->player->fov = 60 * (M_PI / 180);
 	data->player->walk_direction = 0;
 	data->player->turn_direction = 0;
-	data->player->move_speed = 8.0;
-	data->player->rotation_speed = 3 * (M_PI / 180);
+	data->player->move_speed = 5.0;
+	data->player->rotation_speed = 2.5 * (M_PI / 180);
 	data->player->rot_angle = 0;
 	if (data->player->dir == 'N')
 		data->player->rot_angle = 1.5 * M_PI;

@@ -6,11 +6,24 @@
 /*   By: oubelhaj <oubelhaj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 14:33:33 by oubelhaj          #+#    #+#             */
-/*   Updated: 2023/11/04 19:24:25 by oubelhaj         ###   ########.fr       */
+/*   Updated: 2023/11/05 20:35:45 by oubelhaj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+
+void	get_ray_data(t_data *data, t_ray *ray)
+{
+	ray->distance = ray->distance * cos(ray->angle - data->player->rot_angle);
+	ray->dist_proj_plane = (WIDTH / 2) / tan(data->player->fov / 2);
+	ray->wall_strip_h = (TILE_SIZE / ray->distance) * ray->dist_proj_plane;
+	ray->wall_cords.top_pix = (HEIGHT / 2) - (ray->wall_strip_h / 2);
+	if (ray->wall_cords.top_pix < 0)
+		ray->wall_cords.top_pix = 0;
+	ray->wall_cords.bot_pix = ray->wall_cords.top_pix + ray->wall_strip_h;
+	if (ray->wall_cords.bot_pix > HEIGHT)
+		ray->wall_cords.bot_pix = HEIGHT;
+}
 
 int	draw_wall_column(t_data *data, t_point vars, t_point tex, int n)
 {
@@ -18,11 +31,11 @@ int	draw_wall_column(t_data *data, t_point vars, t_point tex, int n)
 	int	distance_from_top;
 
 	distance_from_top = 0;
-	while (vars.y < data->rays[vars.x].wall_cords->bot_pix)
+	while (vars.y < data->rays[vars.x].wall_cords.bot_pix)
 	{
 		distance_from_top = vars.y + (data->rays[vars.x].wall_strip_h / 2)
 			- (HEIGHT / 2);
-		tex.y = distance_from_top * ((float)TEXTURE_HEIGHT
+		tex.y = distance_from_top * ((double)TEXTURE_HEIGHT
 				/ data->rays[vars.x].wall_strip_h);
 		color = get_texture_pixel_color(tex.x, tex.y, data, n);
 		my_mlx_pixel_put(data, vars.x, vars.y, color);
@@ -46,7 +59,7 @@ void	draw_3d_ray(t_data *data, int i)
 		tex_offset.x = (int)data->rays[i].wall_hit_x % TILE_SIZE;
 	n = get_textures(&data->rays[i]);
 	j = -1;
-	while (++j < data->rays[i].wall_cords->top_pix)
+	while (++j < data->rays[i].wall_cords.top_pix)
 		my_mlx_pixel_put(data, i, j, data->map->c);
 	vars.x = i;
 	vars.y = j;
@@ -64,7 +77,7 @@ void	cast_rays(t_data *data)
 	int			j;
 	t_cords		horz;
 	t_cords		vert;
-	float		ray_angle;
+	double		ray_angle;
 
 	i = 0;
 	j = 0;
@@ -82,4 +95,5 @@ void	cast_rays(t_data *data)
 		ray_angle += data->player->fov / WIDTH;
 		i++;
 	}
+	free(data->rays);
 }

@@ -6,15 +6,15 @@
 #    By: oubelhaj <oubelhaj@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/16 02:38:17 by mmokane           #+#    #+#              #
-#    Updated: 2023/11/04 20:11:48 by oubelhaj         ###   ########.fr        #
+#    Updated: 2023/11/05 18:47:27 by oubelhaj         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = cub3d
+NAME = cub3D
 
 CC = cc 
 
-CFLAGS =  -g3 -fsanitize=address 
+CFLAGS =  -Wall -Wextra -Werror #-g3 -fsanitize=address 
 
 MFLAGS = -Lmlx -lmlx -framework OpenGL -framework AppKit
 
