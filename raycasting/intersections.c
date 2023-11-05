@@ -6,7 +6,7 @@
 /*   By: oubelhaj <oubelhaj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 14:30:04 by oubelhaj          #+#    #+#             */
-/*   Updated: 2023/11/04 22:12:52 by oubelhaj         ###   ########.fr       */
+/*   Updated: 2023/11/06 00:28:19 by oubelhaj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ void	setup_horz_intersec_params(t_ray *ray, t_data *data, t_cords *horz)
 {
 	double	arc_tan;
 
-	arc_tan = -1 / tan(ray->angle);
+	arc_tan = 1 / tan(ray->angle);
 	if (ray->is_up)
 	{
 		horz->y_intercept = (int)data->player->y / TILE_SIZE * TILE_SIZE;
-		horz->x_intercept = (data->player->y - horz->y_intercept)
+		horz->x_intercept = -(data->player->y - horz->y_intercept)
 			* arc_tan + data->player->x;
 		horz->y_step = -TILE_SIZE;
 	}
@@ -28,11 +28,11 @@ void	setup_horz_intersec_params(t_ray *ray, t_data *data, t_cords *horz)
 	{
 		horz->y_intercept = (int)data->player->y / TILE_SIZE
 			* TILE_SIZE + TILE_SIZE;
-		horz->x_intercept = (data->player->y - horz->y_intercept)
+		horz->x_intercept = -(data->player->y - horz->y_intercept)
 			* arc_tan + data->player->x;
 		horz->y_step = TILE_SIZE;
 	}
-	horz->x_step = -horz->y_step * arc_tan;
+	horz->x_step = horz->y_step * arc_tan;
 }
 
 void	horizontal_intersections(t_ray *ray, t_data *data, t_cords *horz)

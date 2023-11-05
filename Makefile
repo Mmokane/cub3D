@@ -6,7 +6,7 @@
 #    By: oubelhaj <oubelhaj@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/16 02:38:17 by mmokane           #+#    #+#              #
-#    Updated: 2023/11/05 22:27:09 by oubelhaj         ###   ########.fr        #
+#    Updated: 2023/11/05 22:30:08 by oubelhaj         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CC = cc
 
 CFLAGS =  -Wall -Wextra -Werror #-g3 -fsanitize=address 
 
-MFLAGS = -Lmlx -lmlx -framework OpenGL -framework AppKit
+MFLAGS = -lmlx -framework OpenGL -framework AppKit
 
 SRCS =  parsing_xd/checks.c parsing_xd/map_parsing.c \
 		parsing_xd/parsing.c parsing_xd/map_parsing2.c \
@@ -24,7 +24,6 @@ SRCS =  parsing_xd/checks.c parsing_xd/map_parsing.c \
 		get_next_line/get_next_line_utils.c parsing_xd/utils.c \
 		raycasting/cast_rays.c raycasting/hooks.c raycasting/init.c \
 		raycasting/intersections.c raycasting/textures.c raycasting/utils.c \
-
 
 OBJS = $(SRCS:.c=.o)
 
