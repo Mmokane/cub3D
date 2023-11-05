@@ -6,7 +6,7 @@
 /*   By: oubelhaj <oubelhaj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 04:29:36 by mmokane           #+#    #+#             */
-/*   Updated: 2023/11/03 13:57:45 by oubelhaj         ###   ########.fr       */
+/*   Updated: 2023/11/05 22:26:13 by oubelhaj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,8 @@ void	texture_pars(t_data *data, char *line, int token, int i)
 	space_skipper(line, &i);
 	path = ft_strdup(&line[i]);
 	exten_check(path, ".xpm\0");
+	if (open(path, O_RDONLY) == -1)
+		ft_putstr_fd2("Error: Invalid texture path\n", 2);
 	if (token == T_EA && !data->map->ea)
 		data->map->ea = path;
 	else if (token == T_NO && !data->map->no)
