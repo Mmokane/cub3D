@@ -6,7 +6,7 @@
 #    By: oubelhaj <oubelhaj@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/16 02:38:17 by mmokane           #+#    #+#              #
-#    Updated: 2023/11/05 22:30:08 by oubelhaj         ###   ########.fr        #
+#    Updated: 2023/11/06 02:36:30 by oubelhaj         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = cub3D
 
 CC = cc 
 
-CFLAGS =  -Wall -Wextra -Werror #-g3 -fsanitize=address 
+CFLAGS =  -Wall -Wextra -Werror
 
 MFLAGS = -lmlx -framework OpenGL -framework AppKit
 
@@ -29,7 +29,7 @@ OBJS = $(SRCS:.c=.o)
 
 $(NAME) : $(OBJS)
 		@echo "\033[1;32m---- COMPILING! ----\033[0m"
-		@make -C libft
+		@make -s -C libft
 		@$(CC) $(CFLAGS) $(MFLAGS) $(OBJS) libft/libft.a -o $(NAME)
 		@echo "\033[1;32m----   DONE!  ----\033[0m"
 
